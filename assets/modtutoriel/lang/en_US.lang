@@ -1,3 +1,7 @@
 #en_US - master lang file
 
+#Block
 tile.BlockTutorial.name=Block Tutorial
+
+#Item
+item.ItemTutorial.name=Item Tutorial

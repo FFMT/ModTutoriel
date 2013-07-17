@@ -1,6 +1,7 @@
 package tutoriel.common;
 
 import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import tutoriel.proxy.TutoCommonProxy;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -25,6 +26,7 @@ public class ModTutoriel
 	
 	//declaration des blocs - blocks statement
 	public static Block BlockTutorial;
+	public static Item ItemTutorial;
 	
 	@EventHandler
 	public void PreInit(FMLPreInitializationEvent event)
@@ -38,6 +40,10 @@ public class ModTutoriel
 		GameRegistry.registerBlock(BlockTutorial, "BlockTutorial");
 		
 		//Items
+		ItemTutorial = new ItemTutorial(12000).setUnlocalizedName("ItemTutorial").func_111206_d("modtutoriel:ItemTutorial");
+		
+		//Enregistrement des items - Item registry
+		GameRegistry.registerItem(ItemTutorial, "ItemTutorial", "ModTutoriel");
 		
 		//Achievements
 	}
