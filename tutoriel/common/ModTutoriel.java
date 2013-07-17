@@ -10,7 +10,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 
-@Mod(modid = "ModTutoriel", name = "Mod Tutoriel", version = "1.0.0", acceptedMinecraftVersions = "[1.5.2,)")
+@Mod(modid = "ModTutoriel", name = "Mod Tutoriel", version = "1.0.0", acceptedMinecraftVersions = "[1.6.1,)")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
 
 public class ModTutoriel 
@@ -43,14 +43,13 @@ public class ModTutoriel
 		//Render
 		proxy.registerRender();
 		//NetWork
+		
+		//Recette - Recipe
 	}
 	
 	@EventHandler
 	public void PostInit(FMLPostInitializationEvent event)
 	{
-		//Language
-		
-		//Recipe
-		
+		//Integration avec les autres mods - integration with others mods
 	}
 }
