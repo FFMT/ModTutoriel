@@ -25,7 +25,7 @@ public class ModTutoriel
 	public static ModTutoriel instance;
 	
 	//declaration des blocs - blocks statement
-	public static Block BlockTutorial;
+	public static Block BlockTutorial, TutorialMetadata;
 	public static Item ItemTutorial;
 	
 	@EventHandler
@@ -35,9 +35,11 @@ public class ModTutoriel
 		
 		//Blocks
 		BlockTutorial = new BlockTutorial(2000).setHardness(1.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("BlockTutorial").func_111022_d("modtutoriel:BlockTutorial");
-		
+		TutorialMetadata = new BlockTutorialMetadata(2001).setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("TutorialMetadata");
+
 		//Enregistrement des blocs - Blocks registry
 		GameRegistry.registerBlock(BlockTutorial, "BlockTutorial");
+		GameRegistry.registerBlock(TutorialMetadata, ItemBlockTutorialMetadata.class, "TutorialMetadata", "ModTutoriel");
 		
 		//Items
 		ItemTutorial = new ItemTutorial(12000).setUnlocalizedName("ItemTutorial").func_111206_d("modtutoriel:ItemTutorial");

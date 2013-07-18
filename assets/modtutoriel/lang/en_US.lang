@@ -2,6 +2,14 @@
 
 #Block
 tile.BlockTutorial.name=Block Tutorial
+tile.TutorialMetadata.block1.name=Metadata Tutorial 1
+tile.TutorialMetadata.block2.name=Metadata Tutorial 2
+tile.TutorialMetadata.block3.name=Metadata Tutorial 3
+tile.TutorialMetadata.block4.name=Metadata Tutorial 4
+tile.TutorialMetadata.block5.name=Metadata Tutorial 5
+tile.TutorialMetadata.block6.name=Metadata Tutorial 6
+tile.TutorialMetadata.block7.name=Metadata Tutorial 7
+tile.TutorialMetadata.block8.name=Metadata Tutorial 8
 
 #Item
 item.ItemTutorial.name=Item Tutorial
