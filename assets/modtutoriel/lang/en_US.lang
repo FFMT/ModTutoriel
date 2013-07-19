@@ -13,3 +13,7 @@ tile.TutorialMetadata.block8.name=Metadata Tutorial 8
 
 #Item
 item.ItemTutorial.name=Item Tutorial
+item.ItemWithMetadata.item1.name=Item With Medatada 1
+item.ItemWithMetadata.item2.name=Item With Medatada 2
+item.ItemWithMetadata.item3.name=Item With Medatada 3
+item.ItemWithMetadata.item4.name=Item With Medatada 4

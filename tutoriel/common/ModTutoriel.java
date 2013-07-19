@@ -26,7 +26,7 @@ public class ModTutoriel
 	
 	//declaration des blocs - blocks statement
 	public static Block BlockTutorial, TutorialMetadata;
-	public static Item ItemTutorial;
+	public static Item ItemTutorial, ItemWithMetadata;
 	
 	@EventHandler
 	public void PreInit(FMLPreInitializationEvent event)
@@ -43,9 +43,11 @@ public class ModTutoriel
 		
 		//Items
 		ItemTutorial = new ItemTutorial(12000).setUnlocalizedName("ItemTutorial").func_111206_d("modtutoriel:ItemTutorial");
+		ItemWithMetadata = new ItemWithMetadata(12001).setUnlocalizedName("ItemWithMetadata");
 		
 		//Enregistrement des items - Item registry
 		GameRegistry.registerItem(ItemTutorial, "ItemTutorial", "ModTutoriel");
+		GameRegistry.registerItem(ItemWithMetadata, "ItemWithMetadata", "ModTutoriel");
 		
 		//Achievements
 	}
