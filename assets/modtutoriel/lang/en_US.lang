@@ -17,3 +17,7 @@ item.ItemWithMetadata.item1.name=Item With Medatada 1
 item.ItemWithMetadata.item2.name=Item With Medatada 2
 item.ItemWithMetadata.item3.name=Item With Medatada 3
 item.ItemWithMetadata.item4.name=Item With Medatada 4
+item.TutorialHelmet.name=Tutorial Helmet
+item.TutorialChestPlate.name=Tutorial Chestplate
+item.TutorialLeggings.name=Tutorial Leggings
+item.TutorialBoots.name=Tutorial Boots

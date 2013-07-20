@@ -1,7 +1,9 @@
 package tutoriel.common;
 
 import net.minecraft.block.Block;
+import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.Item;
+import net.minecraftforge.common.EnumHelper;
 import tutoriel.proxy.TutoCommonProxy;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -26,7 +28,9 @@ public class ModTutoriel
 	
 	//declaration des blocs - blocks statement
 	public static Block BlockTutorial, TutorialMetadata;
-	public static Item ItemTutorial, ItemWithMetadata;
+	public static Item ItemTutorial, ItemWithMetadata, TutorialHelmet, TutorialChestPlate, TutorialLeggings, TutorialBoots;
+	
+	static EnumArmorMaterial TutorialArmor = EnumHelper.addArmorMaterial("Tutorial", 20, new int[]{2, 8, 4, 2}, 15);
 	
 	@EventHandler
 	public void PreInit(FMLPreInitializationEvent event)
@@ -44,10 +48,18 @@ public class ModTutoriel
 		//Items
 		ItemTutorial = new ItemTutorial(12000).setUnlocalizedName("ItemTutorial").func_111206_d("modtutoriel:ItemTutorial");
 		ItemWithMetadata = new ItemWithMetadata(12001).setUnlocalizedName("ItemWithMetadata");
+		TutorialHelmet = new ItemTutorialArmor(12002, TutorialArmor, 0,0).setUnlocalizedName("TutorialHelmet").func_111206_d("modtutoriel:HelmetTutorial");
+		TutorialChestPlate = new ItemTutorialArmor(12003, TutorialArmor, 0, 1).setUnlocalizedName("TutorialChestPlate").func_111206_d("modtutoriel:ChestPlateTutorial");
+		TutorialLeggings = new ItemTutorialArmor(12004, TutorialArmor, 0, 2).setUnlocalizedName("TutorialLeggings").func_111206_d("modtutoriel:LeggingsTutorial");
+		TutorialBoots = new ItemTutorialArmor(12005, TutorialArmor, 0, 3).setUnlocalizedName("TutorialBoots").func_111206_d("modtutoriel:BootsTutorial");
 		
 		//Enregistrement des items - Item registry
 		GameRegistry.registerItem(ItemTutorial, "ItemTutorial", "ModTutoriel");
 		GameRegistry.registerItem(ItemWithMetadata, "ItemWithMetadata", "ModTutoriel");
+		GameRegistry.registerItem(TutorialHelmet, "TutorialHelmet", "ModTutoriel");
+		GameRegistry.registerItem(TutorialChestPlate, "TutorialChestPlate", "ModTutoriel");
+		GameRegistry.registerItem(TutorialLeggings, "TutorialLeggings", "ModTutoriel");
+		GameRegistry.registerItem(TutorialBoots, "TutorialBoots", "ModTutoriel");
 		
 		//Achievements
 	}
