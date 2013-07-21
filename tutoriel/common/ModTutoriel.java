@@ -4,6 +4,8 @@ import net.minecraft.block.Block;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.EnumHelper;
+import net.minecraftforge.common.MinecraftForge;
+import tutoriel.client.EventSoundTutorial;
 import tutoriel.proxy.TutoCommonProxy;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -36,6 +38,12 @@ public class ModTutoriel
 	public void PreInit(FMLPreInitializationEvent event)
 	{
 		//Configuration
+		
+		//Son - sound
+		if(event.getSide().isClient())
+		{
+			MinecraftForge.EVENT_BUS.register(new EventSoundTutorial());
+		}
 		
 		//Blocks
 		BlockTutorial = new BlockTutorial(2000).setHardness(1.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("BlockTutorial").func_111022_d("modtutoriel:BlockTutorial");
