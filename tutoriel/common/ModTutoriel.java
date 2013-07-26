@@ -105,6 +105,8 @@ public class ModTutoriel
 	@EventHandler
 	public void Init(FMLInitializationEvent event)
 	{
+		//Event Bus
+		MinecraftForge.EVENT_BUS.register(new LivingEvent());
 		//Registry
 
 		//Mobs
