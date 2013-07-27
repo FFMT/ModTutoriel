@@ -15,7 +15,8 @@ public class BlockTutorialMetadata extends Block
 {
 	public static String[] type = new String[]
 	{"block1", "block2", "block3", "block4", "block5", "block6", "block7", "block8"};
-	private Icon[] IconArray;
+	private String[] sideType = new String[]{"bottom", "top", "north", "south", "west", "east"};
+	private Icon[][] IconArray;
 
 	public BlockTutorialMetadata(int id)
 	{
@@ -25,10 +26,13 @@ public class BlockTutorialMetadata extends Block
 
 	public void registerIcons(IconRegister iconregister)
 	{
-		IconArray = new Icon[type.length];
-		for(int i = 0; i < type.length; i++)
+		IconArray = new Icon[type.length][6]; //6 car il y 6 side
+		for(int i = 0; i < type.length; i++) //la boucle pour les metadata
 		{
-			IconArray[i] = iconregister.registerIcon("ModTutoriel:" + type[i]);
+			for(int j = 0; j < 6; j++) //la boucle pour les côtés
+			{
+				IconArray[i][j] = iconregister.registerIcon("ModTutoriel:" + type[i] + "_" + sideType[j]);
+			}
 		}
 	}
 
@@ -44,7 +48,7 @@ public class BlockTutorialMetadata extends Block
 	@SideOnly(Side.CLIENT)
 	public Icon getIcon(int side, int metadata)
 	{
-		return metadata < type.length && metadata >= 0 ? IconArray[metadata] : blockIcon;
+		return metadata < type.length && metadata >= 0 ? IconArray[metadata][side] : IconArray[0][0];
 	}
 
 	public int damageDropped(int metadata)
