@@ -15,7 +15,7 @@ public class BlockTutorialMetadata extends Block
 {
 	public static String[] type = new String[]
 	{"block1", "block2", "block3", "block4", "block5", "block6", "block7", "block8"};
-	private String[] sideType = new String[]{"bottom", "top", "north", "south", "west", "east"};
+	private String[] sideType = new String[]{"bottom", "top", "side"};
 	private Icon[][] IconArray;
 
 	public BlockTutorialMetadata(int id)
@@ -26,10 +26,10 @@ public class BlockTutorialMetadata extends Block
 
 	public void registerIcons(IconRegister iconregister)
 	{
-		IconArray = new Icon[type.length][6]; //6 car il y 6 side
+		IconArray = new Icon[type.length][3]; //3 texture par bloc cette fois (bas, haut, les 4 autres côtés)
 		for(int i = 0; i < type.length; i++) //la boucle pour les metadata
 		{
-			for(int j = 0; j < 6; j++) //la boucle pour les côtés
+			for(int j = 0; j < 3; j++) //la boucle pour les côtés
 			{
 				IconArray[i][j] = iconregister.registerIcon("ModTutoriel:" + type[i] + "_" + sideType[j]);
 			}
@@ -48,6 +48,7 @@ public class BlockTutorialMetadata extends Block
 	@SideOnly(Side.CLIENT)
 	public Icon getIcon(int side, int metadata)
 	{
+		if(side > 2) side = 2;
 		return metadata < type.length && metadata >= 0 ? IconArray[metadata][side] : IconArray[0][0];
 	}
 
