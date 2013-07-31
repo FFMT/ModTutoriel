@@ -32,10 +32,10 @@ public class ModTutoriel
 	
 	//declaration des blocs - blocks statement
 	public static Block BlockTutorial, TutorialMetadata;
-	public static Item ItemTutorial, ItemWithMetadata, TutorialHelmet, TutorialChestPlate, TutorialLeggings, TutorialBoots;
+	public static Item ItemTutorial, ItemWithMetadata, TutorialHelmet, TutorialChestPlate, TutorialLeggings, TutorialBoots, TutorialEgg;
 	
 	public static int BlockTutorialID, TutorialMetadataID, ItemTutorialID, ItemWithMetadataID, TutorialHelmetID,
-	TutorialChestPlateID, TutorialLeggingsID, TutorialBootsID;
+	TutorialChestPlateID, TutorialLeggingsID, TutorialBootsID, TutorialEggID;
 	
 	static EnumArmorMaterial TutorialArmor = EnumHelper.addArmorMaterial("Tutorial", 20, new int[]{2, 8, 4, 2}, 15);
 	
@@ -56,6 +56,7 @@ public class ModTutoriel
 			TutorialChestPlateID = cfg.getItem("Tutorial Chest Plate", 12003).getInt();
 			TutorialLeggingsID = cfg.getItem("Tutorial Leggings", 12004).getInt();
 			TutorialBootsID = cfg.getItem("Tutorial Boots", 12005).getInt();
+			TutorialEggID = cfg.getItem("Tutorial Egg", 12006).getInt();
 		}
 		catch(Exception ex)
 		{
@@ -90,6 +91,7 @@ public class ModTutoriel
 		TutorialChestPlate = new ItemTutorialArmor(TutorialChestPlateID, TutorialArmor, 0, 1).setUnlocalizedName("TutorialChestPlate").func_111206_d("modtutoriel:ChestPlateTutorial");
 		TutorialLeggings = new ItemTutorialArmor(TutorialLeggingsID, TutorialArmor, 0, 2).setUnlocalizedName("TutorialLeggings").func_111206_d("modtutoriel:LeggingsTutorial");
 		TutorialBoots = new ItemTutorialArmor(TutorialBootsID, TutorialArmor, 0, 3).setUnlocalizedName("TutorialBoots").func_111206_d("modtutoriel:BootsTutorial");
+		TutorialEgg = new ItemTutorialEgg(TutorialEggID, 5, 4.5F, false).setUnlocalizedName("TutorialEgg").func_111206_d("modtutoriel:ChocolateEgg");
 		
 		//Enregistrement des items - Item registry
 		GameRegistry.registerItem(ItemTutorial, "ItemTutorial", "ModTutoriel");
@@ -98,6 +100,7 @@ public class ModTutoriel
 		GameRegistry.registerItem(TutorialChestPlate, "TutorialChestPlate", "ModTutoriel");
 		GameRegistry.registerItem(TutorialLeggings, "TutorialLeggings", "ModTutoriel");
 		GameRegistry.registerItem(TutorialBoots, "TutorialBoots", "ModTutoriel");
+		GameRegistry.registerItem(TutorialEgg, "TutorialEgg", "ModTutoriel");
 		
 		//Achievements
 	}
