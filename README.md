@@ -1,4 +1,4 @@
 ModTutoriel
 ===========
 
-http://forge.mcnanotech.fr/showthread.php?tid=16
+Tutoriel français [ici](http://forge.mcnanotech.fr/showthread.php?tid=16)
