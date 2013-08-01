@@ -2,16 +2,19 @@ package tutoriel.common;
 
 import java.util.List;
 
-import net.minecraft.block.Block;
+import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
+import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockTutorialMetadata extends Block
+public class BlockTutorialMetadata extends BlockContainer
 {
 	public static String[] type = new String[]
 	{"block1", "block2", "block3", "block4", "block5", "block6", "block7", "block8"};
@@ -101,5 +104,39 @@ public class BlockTutorialMetadata extends Block
 	public int damageDropped(int metadata)
 	{
 		return metadata;
+	}
+
+	@Override
+	public TileEntity createNewTileEntity(World world)
+	{
+		return null;
+	}
+
+	@Override
+	public TileEntity createTileEntity(World world, int metadata)
+	{
+		if(metadata == 0)
+			return new TileEntityTutorial();
+		else
+			return null;
+	}
+
+	public boolean hasTileEntity(int metadata)
+	{
+		if(metadata == 0)
+			return true;
+		else
+			return false;
+	}
+
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9)
+	{
+		if(!world.isRemote)
+		{
+			TileEntityTutorial te = (TileEntityTutorial)world.getBlockTileEntity(x, y, z);
+			te.addplayertolist(player.getEntityName());
+			player.addChatMessage("Derniers utilisateurs : " + te.getPlayerList());
+		}
+		return true;
 	}
 }
