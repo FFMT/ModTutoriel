@@ -34,7 +34,6 @@ public class TileEntityTutorial extends TileEntity
 	public void addplayertolist(String playerName)
 	{
 		if(!visiteur[0].equals(playerName))
-			;
 		{
 			for(int i = 3; i >= 0; i--)
 			{
