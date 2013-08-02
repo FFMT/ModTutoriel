@@ -131,12 +131,19 @@ public class BlockTutorialMetadata extends BlockContainer
 
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9)
 	{
-		if(!world.isRemote)
+		if(world.getBlockMetadata(x, y, z) == 0)
 		{
-			TileEntityTutorial te = (TileEntityTutorial)world.getBlockTileEntity(x, y, z);
-			te.addplayertolist(player.getEntityName());
-			player.addChatMessage("Derniers utilisateurs : " + te.getPlayerList());
+			if(!world.isRemote)
+			{
+				TileEntityTutorial te = (TileEntityTutorial)world.getBlockTileEntity(x, y, z);
+				te.addplayertolist(player.getEntityName());
+				player.addChatMessage("Derniers utilisateurs : " + te.getPlayerList());
+			}
+			return true;
 		}
-		return true;
+		else
+		{
+			return false;
+		}
 	}
 }
