@@ -113,6 +113,7 @@ public class ModTutoriel
 		
 		//Registry
 		GameRegistry.registerTileEntity(TileEntityTutorial.class, "TileEntityTutorial");
+		GameRegistry.registerTileEntity(TileEntityTutorial2.class, "TileEntityTutorial2");
 
 		//Mobs
 		

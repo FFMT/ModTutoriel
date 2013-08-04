@@ -6,18 +6,20 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockTutorialMetadata extends BlockContainer
 {
-	public static String[] type = new String[]
-	{"block1", "block2", "block3", "block4", "block5", "block6", "block7", "block8"};
+	public static String[] type = new String[]{"block1", "block2", "block3", "block4", "block5", "block6", "block7", "block8"};
 	private Icon[] Icon1 = new Icon[6];
 	private Icon[] Icon2 = new Icon[5];
 	private Icon[] Icon3 = new Icon[4];
@@ -49,7 +51,7 @@ public class BlockTutorialMetadata extends BlockContainer
 
 		Icon3[0] = iconregister.registerIcon("modtutoriel:block3_top");
 		Icon3[1] = iconregister.registerIcon("modtutoriel:block3_bottom");
-		Icon3[2] = iconregister.registerIcon("modtutoriel:block3_north");
+		Icon3[2] = iconregister.registerIcon("modtutoriel:block3_front");
 		Icon3[3] = iconregister.registerIcon("modtutoriel:block3");
 
 		Icon4[0] = iconregister.registerIcon("modtutoriel:block4_top");
@@ -72,6 +74,20 @@ public class BlockTutorialMetadata extends BlockContainer
 		for(int metadata = 0; metadata < type.length; metadata++)
 		{
 			list.add(new ItemStack(id, 1, metadata));
+		}
+	}
+
+	@SideOnly(Side.CLIENT)
+	public Icon getBlockTexture(IBlockAccess blockaccess, int x, int y, int z, int side)
+	{
+		if(blockaccess.getBlockMetadata(x, y, z) == 2)
+		{
+			TileEntity te = blockaccess.getBlockTileEntity(x, y, z);
+			byte direction = ((TileEntityTutorial2)te).getDirection();
+			return side == 1 ? Icon3[0] : (side == 0 ? Icon3[1] : (direction == 2 && side == 2 ? Icon3[2] : (direction == 3 && side == 5 ? Icon3[2] : (direction == 0 && side == 3 ? Icon3[2] : (direction == 1 && side == 4 ? Icon3[2] : Icon3[3])))));
+		} else
+		{
+			return this.getIcon(side, blockaccess.getBlockMetadata(x, y, z));
 		}
 	}
 
@@ -117,13 +133,15 @@ public class BlockTutorialMetadata extends BlockContainer
 	{
 		if(metadata == 0)
 			return new TileEntityTutorial();
+		else if(metadata == 2)
+			return new TileEntityTutorial2();
 		else
 			return null;
 	}
 
 	public boolean hasTileEntity(int metadata)
 	{
-		if(metadata == 0)
+		if(metadata == 0 || metadata == 2)
 			return true;
 		else
 			return false;
@@ -140,10 +158,20 @@ public class BlockTutorialMetadata extends BlockContainer
 				player.addChatMessage("Derniers utilisateurs : " + te.getPlayerList());
 			}
 			return true;
-		}
-		else
+		} else
 		{
 			return false;
+		}
+	}
+
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase living, ItemStack stack)
+	{
+		int direction = MathHelper.floor_double((double)(living.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
+		TileEntity te = world.getBlockTileEntity(x, y, z);
+		if(te != null && stack.getItemDamage() == 2 && te instanceof TileEntityTutorial2)
+		{
+			((TileEntityTutorial2)te).setDirection((byte)direction);
+			world.markBlockForUpdate(x, y, z);
 		}
 	}
 }
