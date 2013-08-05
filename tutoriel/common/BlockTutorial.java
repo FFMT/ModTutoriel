@@ -31,14 +31,14 @@ public class BlockTutorial extends Block
 	}
 
 	@SideOnly(Side.CLIENT)
-    public Icon getIcon(int side, int metadata)
-    {
-        return side == 1 ? this.icontop : (side == 0 ? this.iconbottom : (metadata == 2 && side == 2 ? this.iconfront : (metadata == 3 && side == 5 ? this.iconfront : (metadata == 0 && side == 3 ? this.iconfront : (metadata == 1 && side == 4 ? this.iconfront : this.blockIcon)))));
-    }
-	
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase living, ItemStack stack)
-    {
-        int direction = MathHelper.floor_double((double)(living.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
-        world.setBlockMetadataWithNotify(x, y, z, direction, 2);
-    }
+	public Icon getIcon(int side, int metadata)
+	{
+		return side == 1 ? this.icontop : (side == 0 ? this.iconbottom : (metadata == 2 && side == 2 ? this.iconfront : (metadata == 3 && side == 5 ? this.iconfront : (metadata == 0 && side == 3 ? this.iconfront : (metadata == 1 && side == 4 ? this.iconfront : this.blockIcon)))));
+	}
+
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase living, ItemStack stack)
+	{
+		int direction = MathHelper.floor_double((double)(living.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
+		world.setBlockMetadataWithNotify(x, y, z, direction, 2);
+	}
 }

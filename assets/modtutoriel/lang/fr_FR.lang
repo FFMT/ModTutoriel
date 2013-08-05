@@ -10,6 +10,7 @@ tile.TutorialMetadata.block5.name=Tutoriel metadata 5
 tile.TutorialMetadata.block6.name=Tutoriel metadata 6
 tile.TutorialMetadata.block7.name=Tutoriel metadata 7
 tile.TutorialMetadata.block8.name=Tutoriel metadata 8
+tile.StairsTutorial.name=Escalier Tutoriel
 
 #Item
 item.ItemTutorial.name=Item Tutoriel
