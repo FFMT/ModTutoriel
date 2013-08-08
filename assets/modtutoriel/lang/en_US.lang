@@ -1,7 +1,7 @@
 #en_US - master lang file
 
 #Block
-tile.BlockTutorial.name=Block Tutorial
+tile.BlockTutorial.name=Tutorial Block
 tile.TutorialMetadata.block1.name=Metadata Tutorial 1
 tile.TutorialMetadata.block2.name=Metadata Tutorial 2
 tile.TutorialMetadata.block3.name=Metadata Tutorial 3
