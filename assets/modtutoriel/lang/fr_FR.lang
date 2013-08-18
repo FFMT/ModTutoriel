@@ -23,3 +23,6 @@ item.TutorialChestPlate.name=Plastron tutoriel
 item.TutorialLeggings.name=Jambières tutoriel
 item.TutorialBoots.name=Bottes tutoriel
 item.TutorialEgg.name=Œuf au chocolat
+
+#CreativeTabs
+itemGroup.TutorialCreativeTabs = Tutoriel Table Créative
