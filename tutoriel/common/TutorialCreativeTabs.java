@@ -6,9 +6,9 @@ import net.minecraft.item.ItemStack;
 public class TutorialCreativeTabs extends CreativeTabs
 {
 
-	public TutorialCreativeTabs(String name)
+	public TutorialCreativeTabs(String label)
 	{
-		super(name);
+		super(label);
 		
 	}
 	

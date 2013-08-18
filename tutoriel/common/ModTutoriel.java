@@ -1,6 +1,7 @@
 package tutoriel.common;
 
 import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -38,6 +39,9 @@ public class ModTutoriel
 	TutorialChestPlateID, TutorialLeggingsID, TutorialBootsID, TutorialEggID;
 	
 	static EnumArmorMaterial TutorialArmor = EnumHelper.addArmorMaterial("Tutorial", 20, new int[]{2, 8, 4, 2}, 15);
+
+	//declaration des tables creatives
+	public static CreativeTabs TutorialCreativeTabs = new TutorialCreativeTabs("TutorialCreativeTabs");
 	
 	@EventHandler
 	public void PreInit(FMLPreInitializationEvent event)
@@ -106,6 +110,8 @@ public class ModTutoriel
 		GameRegistry.registerItem(TutorialEgg, "TutorialEgg", "ModTutoriel");
 		
 		//Achievements
+		
+		//CreativeTabs
 	}
 	
 	@EventHandler

@@ -19,7 +19,7 @@ public class ItemWithMetadata extends Item
 	public ItemWithMetadata(int id)
 	{
 		super(id);
-		this.setCreativeTab(CreativeTabs.tabMaterials);
+		this.setCreativeTab(ModTutoriel.TutorialCreativeTabs);
 		this.setHasSubtypes(true);
 	}
 
