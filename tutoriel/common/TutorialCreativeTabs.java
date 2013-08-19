@@ -5,11 +5,9 @@ import net.minecraft.item.ItemStack;
 
 public class TutorialCreativeTabs extends CreativeTabs
 {
-
 	public TutorialCreativeTabs(String label)
 	{
 		super(label);
-		
 	}
 	
 	@Override
