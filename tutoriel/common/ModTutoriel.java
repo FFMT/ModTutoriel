@@ -110,8 +110,6 @@ public class ModTutoriel
 		GameRegistry.registerItem(TutorialEgg, "TutorialEgg", "ModTutoriel");
 		
 		//Achievements
-		
-		//CreativeTabs
 	}
 	
 	@EventHandler
