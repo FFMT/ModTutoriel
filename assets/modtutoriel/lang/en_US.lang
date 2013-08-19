@@ -28,3 +28,6 @@ item.TutorialPickaxe.name=Tutorial Pickaxe
 item.TutorialAxe.name=Tutorial Axe
 item.TutorialShovel.name=Tutorial Shovel
 item.TutorialHoe.name=Tutorial Hoe
+
+#CreativeTabs
+itemGroup.TutorialCreativeTabs=Tutorial Creative Table

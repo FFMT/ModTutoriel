@@ -11,7 +11,7 @@ public class ItemTutorial extends Item
 	public ItemTutorial(int id)
 	{
 		super(id);
-		this.setCreativeTab(CreativeTabs.tabMaterials);
+		this.setCreativeTab(ModTutoriel.TutorialCreativeTabs);
 	}
 
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)

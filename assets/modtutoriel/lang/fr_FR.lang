@@ -28,3 +28,6 @@ item.TutorialPickaxe.name=Pioche tutoriel
 item.TutorialAxe.name=Hache tutoriel
 item.TutorialShovel.name=Pelle tutoriel
 item.TutorialHoe.name=Houe tutoriel
+
+#CreativeTabs
+itemGroup.TutorialCreativeTabs=Tutoriel Table Créative

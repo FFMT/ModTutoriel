@@ -31,7 +31,7 @@ public class BlockTutorialMetadata extends BlockContainer
 	public BlockTutorialMetadata(int id)
 	{
 		super(id, Material.rock);
-		this.setCreativeTab(CreativeTabs.tabBlock);
+		this.setCreativeTab(ModTutoriel.TutorialCreativeTabs);
 	}
 
 	public void registerIcons(IconRegister iconregister)

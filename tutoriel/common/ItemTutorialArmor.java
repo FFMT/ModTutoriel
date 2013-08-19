@@ -10,6 +10,7 @@ public class ItemTutorialArmor extends ItemArmor
 	public ItemTutorialArmor(int id, EnumArmorMaterial armorMaterial, int type, int layer)
 	{
 		super(id, armorMaterial, type, layer);
+		this.setCreativeTab(ModTutoriel.TutorialCreativeTabs);
 	}
 
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, int layer)

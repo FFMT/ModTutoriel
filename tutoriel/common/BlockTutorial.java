@@ -19,7 +19,7 @@ public class BlockTutorial extends Block
 	public BlockTutorial(int id)
 	{
 		super(id, Material.rock);
-		this.setCreativeTab(CreativeTabs.tabBlock);
+		this.setCreativeTab(ModTutoriel.TutorialCreativeTabs);
 	}
 
 	public void registerIcons(IconRegister iconRegister)
