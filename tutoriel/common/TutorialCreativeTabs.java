@@ -15,5 +15,4 @@ public class TutorialCreativeTabs extends CreativeTabs
 	{
 		return new ItemStack(ModTutoriel.BlockTutorial);
 	}
-
 }
