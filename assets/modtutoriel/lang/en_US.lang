@@ -11,6 +11,11 @@ tile.TutorialMetadata.block6.name=Metadata Tutorial 6
 tile.TutorialMetadata.block7.name=Metadata Tutorial 7
 tile.TutorialMetadata.block8.name=Metadata Tutorial 8
 tile.StairsTutorial.name=Stairs Tutorial
+tile.TutorialSlab.tuto.name=Tutorial Slab
+tile.TutorialSlab.tutometa1.name=Metadata Tutorial 1 Slab
+tile.TutorialSlab.diamond.name=Diamond Slab
+tile.TutorialSlab.gold.name=Gold Slab
+tile.TutorialSlab.iron.name=Iron Slab
 
 #Item
 item.ItemTutorial.name=Item Tutorial
