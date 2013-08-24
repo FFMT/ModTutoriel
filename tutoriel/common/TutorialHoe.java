@@ -10,7 +10,7 @@ public class TutorialHoe extends ItemHoe
 	{
 		super(id, toolMaterial);
 	}
-	
+
 	public boolean getIsRepairable(ItemStack stack, ItemStack outputstack)
 	{
 		return true;

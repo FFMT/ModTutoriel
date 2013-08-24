@@ -19,7 +19,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockTutorialMetadata extends BlockContainer
 {
-	public static String[] type = new String[]{"block1", "block2", "block3", "block4", "block5", "block6", "block7", "block8"};
+	public static String[] type = new String[] {"block1", "block2", "block3", "block4", "block5", "block6", "block7", "block8"};
 	private Icon[] Icon1 = new Icon[6];
 	private Icon[] Icon2 = new Icon[5];
 	private Icon[] Icon3 = new Icon[4];
@@ -74,20 +74,6 @@ public class BlockTutorialMetadata extends BlockContainer
 		for(int metadata = 0; metadata < type.length; metadata++)
 		{
 			list.add(new ItemStack(id, 1, metadata));
-		}
-	}
-
-	@SideOnly(Side.CLIENT)
-	public Icon getBlockTexture(IBlockAccess blockaccess, int x, int y, int z, int side)
-	{
-		if(blockaccess.getBlockMetadata(x, y, z) == 2)
-		{
-			TileEntity te = blockaccess.getBlockTileEntity(x, y, z);
-			byte direction = ((TileEntityTutorial2)te).getDirection();
-			return side == 1 ? Icon3[0] : (side == 0 ? Icon3[1] : (direction == 2 && side == 2 ? Icon3[2] : (direction == 3 && side == 5 ? Icon3[2] : (direction == 0 && side == 3 ? Icon3[2] : (direction == 1 && side == 4 ? Icon3[2] : Icon3[3])))));
-		} else
-		{
-			return this.getIcon(side, blockaccess.getBlockMetadata(x, y, z));
 		}
 	}
 
@@ -147,6 +133,21 @@ public class BlockTutorialMetadata extends BlockContainer
 			return false;
 	}
 
+	@SideOnly(Side.CLIENT)
+	public Icon getBlockTexture(IBlockAccess blockaccess, int x, int y, int z, int side)
+	{
+		if(blockaccess.getBlockMetadata(x, y, z) == 2)
+		{
+			TileEntityTutorial2 te = (TileEntityTutorial2)blockaccess.getBlockTileEntity(x, y, z);
+			byte direction = te.getDirection();
+			return side == 1 ? Icon3[0] : (side == 0 ? Icon3[1] : (direction == 2 && side == 2 ? Icon3[2] : (direction == 3 && side == 5 ? Icon3[2] : (direction == 0 && side == 3 ? Icon3[2] : (direction == 1 && side == 4 ? Icon3[2] : Icon3[3])))));
+		}
+		else
+		{
+			return this.getIcon(side, blockaccess.getBlockMetadata(x, y, z));
+		}
+	}
+
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9)
 	{
 		if(world.getBlockMetadata(x, y, z) == 0)
@@ -158,7 +159,8 @@ public class BlockTutorialMetadata extends BlockContainer
 				player.addChatMessage("Derniers utilisateurs : " + te.getPlayerList());
 			}
 			return true;
-		} else
+		}
+		else
 		{
 			return false;
 		}

@@ -31,25 +31,22 @@ public class ModTutoriel
 	@Instance("ModTutoriel")
 	public static ModTutoriel instance;
 
-	//declaration des blocs - blocks statement
+	// declaration des blocs - blocks statement
 	public static Block BlockTutorial, TutorialMetadata, StairsTutorial;
-	public static Item ItemTutorial, ItemWithMetadata, TutorialHelmet, TutorialChestPlate, TutorialLeggings, 
-	TutorialBoots, TutorialEgg, TutorialSword, TutorialPickaxe, TutorialAxe, TutorialShovel, TutorialHoe;
+	public static Item ItemTutorial, ItemWithMetadata, TutorialHelmet, TutorialChestPlate, TutorialLeggings, TutorialBoots, TutorialEgg, TutorialSword, TutorialPickaxe, TutorialAxe, TutorialShovel, TutorialHoe;
 
-	public static int BlockTutorialID, TutorialMetadataID, StairsTutorialID, ItemTutorialID, ItemWithMetadataID,
-	TutorialHelmetID, TutorialChestPlateID, TutorialLeggingsID, TutorialBootsID, TutorialEggID, TutorialSwordID,
-	TutorialPickaxeID, TutorialAxeID, TutorialShovelID, TutorialHoeID;
+	public static int BlockTutorialID, TutorialMetadataID, StairsTutorialID, ItemTutorialID, ItemWithMetadataID, TutorialHelmetID, TutorialChestPlateID, TutorialLeggingsID, TutorialBootsID, TutorialEggID, TutorialSwordID, TutorialPickaxeID, TutorialAxeID, TutorialShovelID, TutorialHoeID;
 
-	static EnumArmorMaterial TutorialArmor = EnumHelper.addArmorMaterial("Tutorial", 20, new int[]{2, 8, 4, 2}, 15);
+	static EnumArmorMaterial TutorialArmor = EnumHelper.addArmorMaterial("Tutorial", 20, new int[] {2, 8, 4, 2}, 15);
 	static EnumToolMaterial TutorialMaterial = EnumHelper.addToolMaterial("Tutorial", 3, 761, 14.0F, 4, 5);
 
-	//declaration des tables creatives
+	// declaration des tables creatives
 	public static CreativeTabs TutorialCreativeTabs = new TutorialCreativeTabs("TutorialCreativeTabs");
 
 	@EventHandler
 	public void PreInit(FMLPreInitializationEvent event)
 	{
-		//Configuration
+		// Configuration
 		Configuration cfg = new Configuration(event.getSuggestedConfigurationFile());
 		try
 		{
@@ -74,7 +71,7 @@ public class ModTutoriel
 		catch(Exception ex)
 		{
 			event.getModLog().severe("Failed to load configuration");
-		} 
+		}
 		finally
 		{
 			if(cfg.hasChanged())
@@ -83,23 +80,23 @@ public class ModTutoriel
 			}
 		}
 
-		//Son - sound
+		// Son - sound
 		if(event.getSide().isClient())
 		{
 			MinecraftForge.EVENT_BUS.register(new EventSoundTutorial());
 		}
 
-		//Blocks
+		// Blocks
 		BlockTutorial = new BlockTutorial(BlockTutorialID).setHardness(1.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("BlockTutorial");
 		StairsTutorial = new BlockStairsTutorial(StairsTutorialID, BlockTutorial, 0).setUnlocalizedName("StairsTutorial");
 		TutorialMetadata = new BlockTutorialMetadata(TutorialMetadataID).setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("TutorialMetadata");
 
-		//Enregistrement des blocs - Blocks registry
+		// Enregistrement des blocs - Blocks registry
 		GameRegistry.registerBlock(BlockTutorial, "BlockTutorial");
 		GameRegistry.registerBlock(TutorialMetadata, ItemBlockTutorialMetadata.class, "TutorialMetadata", "ModTutoriel");
 		GameRegistry.registerBlock(StairsTutorial, "StairTutorial");
 
-		//Items
+		// Items
 		ItemTutorial = new ItemTutorial(ItemTutorialID).setUnlocalizedName("ItemTutorial").func_111206_d("modtutoriel:ItemTutorial");
 		ItemWithMetadata = new ItemWithMetadata(ItemWithMetadataID).setUnlocalizedName("ItemWithMetadata");
 		TutorialHelmet = new ItemTutorialArmor(TutorialHelmetID, TutorialArmor, 0, 0).setUnlocalizedName("TutorialHelmet").func_111206_d("modtutoriel:HelmetTutorial");
@@ -113,7 +110,7 @@ public class ModTutoriel
 		TutorialShovel = new TutorialShovel(TutorialShovelID, TutorialMaterial).setUnlocalizedName("TutorialShovel").func_111206_d("modtutoriel:TutorialShovel");
 		TutorialHoe = new TutorialHoe(TutorialHoeID, TutorialMaterial).setUnlocalizedName("TutorialHoe").func_111206_d("modtutoriel:TutorialHoe");
 
-		//Enregistrement des items - Item registry
+		// Enregistrement des items - Item registry
 		GameRegistry.registerItem(ItemTutorial, "ItemTutorial", "ModTutoriel");
 		GameRegistry.registerItem(ItemWithMetadata, "ItemWithMetadata", "ModTutoriel");
 		GameRegistry.registerItem(TutorialHelmet, "TutorialHelmet", "ModTutoriel");
@@ -127,41 +124,41 @@ public class ModTutoriel
 		GameRegistry.registerItem(TutorialShovel, "TutorialShovel", "ModTutoriel");
 		GameRegistry.registerItem(TutorialHoe, "TutorialHoe", "ModTutoriel");
 
-		//Achievements
+		// Achievements
 	}
 
 	@EventHandler
 	public void Init(FMLInitializationEvent event)
 	{
-		//Event Bus
+		// Event Bus
 		MinecraftForge.EVENT_BUS.register(new LivingEvent());
 
-		//Registry
+		// Registry
 		GameRegistry.registerTileEntity(TileEntityTutorial.class, "TileEntityTutorial");
 		GameRegistry.registerTileEntity(TileEntityTutorial2.class, "TileEntityTutorial2");
-		
-		//Tools
+
+		// Tools
 		MinecraftForge.setToolClass(TutorialPickaxe, "pickaxe", 3);
 		MinecraftForge.setToolClass(TutorialAxe, "axe", 3);
 		MinecraftForge.setToolClass(TutorialShovel, "shovel", 3);
 
-		//Mobs
+		// Mobs
 
-		//Render
+		// Render
 		proxy.registerRender();
-		//NetWork
+		// NetWork
 
-		//Recette - Recipe
-		GameRegistry.addRecipe(new ItemStack(BlockTutorial), new Object[]{"XXX", "ZYZ", "XXX", 'X', Block.blockLapis, 'Y', new ItemStack(Item.dyePowder, 1, 15), 'Z', new ItemStack(Item.dyePowder, 1, 6)});
-		GameRegistry.addRecipe(new ItemStack(TutorialMetadata, 4, 2), new Object[]{"XXX", "XXX", "   ", 'X', Block.stone});
-		GameRegistry.addRecipe(new ItemStack(TutorialMetadata, 4, 1), new Object[]{"XXX", "XXX", 'X', Block.dirt});
-		GameRegistry.addShapelessRecipe(new ItemStack(ItemTutorial, 2), new Object[]{new ItemStack(Item.dyePowder, 1, 15), new ItemStack(Item.dyePowder, 1, 6)});
+		// Recette - Recipe
+		GameRegistry.addRecipe(new ItemStack(BlockTutorial), new Object[] {"XXX", "ZYZ", "XXX", 'X', Block.blockLapis, 'Y', new ItemStack(Item.dyePowder, 1, 15), 'Z', new ItemStack(Item.dyePowder, 1, 6)});
+		GameRegistry.addRecipe(new ItemStack(TutorialMetadata, 4, 2), new Object[] {"XXX", "XXX", "   ", 'X', Block.stone});
+		GameRegistry.addRecipe(new ItemStack(TutorialMetadata, 4, 1), new Object[] {"XXX", "XXX", 'X', Block.dirt});
+		GameRegistry.addShapelessRecipe(new ItemStack(ItemTutorial, 2), new Object[] {new ItemStack(Item.dyePowder, 1, 15), new ItemStack(Item.dyePowder, 1, 6)});
 		GameRegistry.addRecipe(new ItemStack(TutorialPickaxe), "XXX", " S ", " S ", 'X', ItemTutorial, 'S', Item.stick);
 	}
 
 	@EventHandler
 	public void PostInit(FMLPostInitializationEvent event)
 	{
-		//Integration avec les autres mods - integration with others mods
+		// Integration avec les autres mods - integration with others mods
 	}
 }

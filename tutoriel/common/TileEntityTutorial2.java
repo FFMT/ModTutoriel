@@ -2,7 +2,6 @@ package tutoriel.common;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ForgeDirection;
 
 public class TileEntityTutorial2 extends TileEntity
 {
@@ -17,15 +16,13 @@ public class TileEntityTutorial2 extends TileEntity
 	public void writeToNBT(NBTTagCompound nbtTag)
 	{
 		super.writeToNBT(nbtTag);
-		for(int i = 0; i < 5; i++)
-		{
-			nbtTag.setByte("direction", direction);
-		}
+		nbtTag.setByte("direction", direction);
 	}
 
 	public void setDirection(byte direct)
 	{
 		direction = direct;
+		worldObj.notifyBlockChange(xCoord, yCoord, zCoord, 2);
 	}
 
 	public byte getDirection()

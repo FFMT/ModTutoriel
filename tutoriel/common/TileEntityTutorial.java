@@ -1,12 +1,11 @@
 package tutoriel.common;
 
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityTutorial extends TileEntity
 {
-	public String visiteur[] = new String[]{"visiteur0", "visiteur1", "visiteur2", "visiteur3", "visiteur4"};
+	public String visiteur[] = new String[] {"visiteur0", "visiteur1", "visiteur2", "visiteur3", "visiteur4"};
 
 	public void readFromNBT(NBTTagCompound nbtTag)
 	{

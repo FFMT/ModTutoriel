@@ -9,7 +9,7 @@ public class TutorialCreativeTabs extends CreativeTabs
 	{
 		super(label);
 	}
-	
+
 	@Override
 	public ItemStack getIconItemStack()
 	{
