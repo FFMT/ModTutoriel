@@ -30,12 +30,6 @@ public class BlockSlabTutorial extends BlockStep
 	public Icon getIcon(int side, int metadata)
 	{
 		int k = metadata & 7;
-
-		if(this.isDoubleSlab && (metadata & 8) != 0)
-		{
-			metadata = 1;
-		}
-
 		return k == 0 ? ModTutoriel.BlockTutorial.getBlockTextureFromSide(side) : k == 1 ? ModTutoriel.TutorialMetadata.getIcon(side, 0) : k == 2 ? Block.blockDiamond.getBlockTextureFromSide(side) : k == 3 ? Block.blockGold.getBlockTextureFromSide(side) : Block.blockIron.getBlockTextureFromSide(side);
 	}
 
