@@ -106,18 +106,18 @@ public class ModTutoriel
 		GameRegistry.registerBlock(SingleSlabTuto, ItemBlockTutorialSlab.class, "SingleSlabTuto");
 
 		// Items
-		ItemTutorial = new ItemTutorial(ItemTutorialID).setUnlocalizedName("ItemTutorial").func_111206_d("modtutoriel:ItemTutorial");
+		ItemTutorial = new ItemTutorial(ItemTutorialID).setUnlocalizedName("ItemTutorial").setTextureName("modtutoriel:ItemTutorial");
 		ItemWithMetadata = new ItemWithMetadata(ItemWithMetadataID).setUnlocalizedName("ItemWithMetadata");
-		TutorialHelmet = new ItemTutorialArmor(TutorialHelmetID, TutorialArmor, 0, 0).setUnlocalizedName("TutorialHelmet").func_111206_d("modtutoriel:HelmetTutorial");
-		TutorialChestPlate = new ItemTutorialArmor(TutorialChestPlateID, TutorialArmor, 0, 1).setUnlocalizedName("TutorialChestPlate").func_111206_d("modtutoriel:ChestPlateTutorial");
-		TutorialLeggings = new ItemTutorialArmor(TutorialLeggingsID, TutorialArmor, 0, 2).setUnlocalizedName("TutorialLeggings").func_111206_d("modtutoriel:LeggingsTutorial");
-		TutorialBoots = new ItemTutorialArmor(TutorialBootsID, TutorialArmor, 0, 3).setUnlocalizedName("TutorialBoots").func_111206_d("modtutoriel:BootsTutorial");
-		TutorialEgg = new ItemTutorialEgg(TutorialEggID, 5, 4.5F, false).setUnlocalizedName("TutorialEgg").func_111206_d("modtutoriel:ChocolateEgg");
-		TutorialSword = new TutorialSword(TutorialSwordID, TutorialMaterial).setUnlocalizedName("TutorialSword").func_111206_d("modtutoriel:TutorialSword");
-		TutorialPickaxe = new TutorialPickaxe(TutorialPickaxeID, TutorialMaterial).setUnlocalizedName("TutorialPickaxe").func_111206_d("modtutoriel:TutorialPickaxe");
-		TutorialAxe = new TutorialAxe(TutorialAxeID, TutorialMaterial).setUnlocalizedName("TutorialAxe").func_111206_d("modtutoriel:TutorialAxe");
-		TutorialShovel = new TutorialShovel(TutorialShovelID, TutorialMaterial).setUnlocalizedName("TutorialShovel").func_111206_d("modtutoriel:TutorialShovel");
-		TutorialHoe = new TutorialHoe(TutorialHoeID, TutorialMaterial).setUnlocalizedName("TutorialHoe").func_111206_d("modtutoriel:TutorialHoe");
+		TutorialHelmet = new ItemTutorialArmor(TutorialHelmetID, TutorialArmor, 0, 0).setUnlocalizedName("TutorialHelmet").setTextureName("modtutoriel:HelmetTutorial");
+		TutorialChestPlate = new ItemTutorialArmor(TutorialChestPlateID, TutorialArmor, 0, 1).setUnlocalizedName("TutorialChestPlate").setTextureName("modtutoriel:ChestPlateTutorial");
+		TutorialLeggings = new ItemTutorialArmor(TutorialLeggingsID, TutorialArmor, 0, 2).setUnlocalizedName("TutorialLeggings").setTextureName("modtutoriel:LeggingsTutorial");
+		TutorialBoots = new ItemTutorialArmor(TutorialBootsID, TutorialArmor, 0, 3).setUnlocalizedName("TutorialBoots").setTextureName("modtutoriel:BootsTutorial");
+		TutorialEgg = new ItemTutorialEgg(TutorialEggID, 5, 4.5F, false).setUnlocalizedName("TutorialEgg").setTextureName("modtutoriel:ChocolateEgg");
+		TutorialSword = new TutorialSword(TutorialSwordID, TutorialMaterial).setUnlocalizedName("TutorialSword").setTextureName("modtutoriel:TutorialSword");
+		TutorialPickaxe = new TutorialPickaxe(TutorialPickaxeID, TutorialMaterial).setUnlocalizedName("TutorialPickaxe").setTextureName("modtutoriel:TutorialPickaxe");
+		TutorialAxe = new TutorialAxe(TutorialAxeID, TutorialMaterial).setUnlocalizedName("TutorialAxe").setTextureName("modtutoriel:TutorialAxe");
+		TutorialShovel = new TutorialShovel(TutorialShovelID, TutorialMaterial).setUnlocalizedName("TutorialShovel").setTextureName("modtutoriel:TutorialShovel");
+		TutorialHoe = new TutorialHoe(TutorialHoeID, TutorialMaterial).setUnlocalizedName("TutorialHoe").setTextureName("modtutoriel:TutorialHoe");
 
 		// Enregistrement des items - Item registry
 		GameRegistry.registerItem(ItemTutorial, "ItemTutorial", "ModTutoriel");
