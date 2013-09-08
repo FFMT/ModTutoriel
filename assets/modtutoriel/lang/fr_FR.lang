@@ -36,3 +36,6 @@ item.TutorialHoe.name=Houe tutoriel
 
 #CreativeTabs
 itemGroup.TutorialCreativeTabs=Tutoriel Table Créative
+
+#Container
+container.bigchest=Grand coffre

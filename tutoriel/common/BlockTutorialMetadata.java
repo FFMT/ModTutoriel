@@ -7,13 +7,17 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import cpw.mods.fml.common.network.FMLNetworkHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -117,17 +121,22 @@ public class BlockTutorialMetadata extends BlockContainer
 	@Override
 	public TileEntity createTileEntity(World world, int metadata)
 	{
-		if(metadata == 0)
+		switch(metadata)
+		{
+		case 0:
 			return new TileEntityTutorial();
-		else if(metadata == 2)
+		case 2:
 			return new TileEntityTutorial2();
-		else
+		case 3:
+			return new TileEntityBigChest();
+		default:
 			return null;
+		}
 	}
 
 	public boolean hasTileEntity(int metadata)
 	{
-		if(metadata == 0 || metadata == 2)
+		if(metadata == 0 || metadata == 2 || metadata == 3)
 			return true;
 		else
 			return false;
@@ -160,10 +169,13 @@ public class BlockTutorialMetadata extends BlockContainer
 			}
 			return true;
 		}
-		else
+		
+		if(world.getBlockMetadata(x, y, z) == 3)
 		{
-			return false;
+			FMLNetworkHandler.openGui(player, ModTutoriel.instance, 0, world, x, y, z);
+			return true;
 		}
+		return false;
 	}
 
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase living, ItemStack stack)
@@ -175,5 +187,60 @@ public class BlockTutorialMetadata extends BlockContainer
 			((TileEntityTutorial2)te).setDirection((byte)direction);
 			world.markBlockForUpdate(x, y, z);
 		}
+		if(te != null && stack.getItemDamage() == 3 && te instanceof TileEntityBigChest && stack.hasDisplayName())
+		{
+			((TileEntityBigChest)te).setCustomGuiName(stack.getDisplayName());
+		}
 	}
+	
+    public void breakBlock(World world, int x, int y, int z, int side, int metadata)
+    {
+    	if(metadata == 3)
+    	{
+    		dropContainerItem(world, x, y, z);
+    	}
+        super.breakBlock(world, x, y, z, side, metadata);
+    }
+    
+    protected void dropContainerItem(World world, int x, int y, int z)
+    {
+    	TileEntityBigChest bigchest = (TileEntityBigChest)world.getBlockTileEntity(x, y, z);
+
+        if (bigchest != null)
+        {
+            for (int slotId = 0; slotId < bigchest.getSizeInventory(); slotId++)
+            {
+                ItemStack stack = bigchest.getStackInSlot(slotId);
+
+                if (stack != null)
+                {
+                    float f = world.rand.nextFloat() * 0.8F + 0.1F;
+                    float f1 = world.rand.nextFloat() * 0.8F + 0.1F;
+                    EntityItem entityitem;
+
+                    for (float f2 = world.rand.nextFloat() * 0.8F + 0.1F; stack.stackSize > 0; world.spawnEntityInWorld(entityitem))
+                    {
+                        int k1 = world.rand.nextInt(21) + 10;
+
+                        if (k1 > stack.stackSize)
+                        {
+                            k1 = stack.stackSize;
+                        }
+
+                        stack.stackSize -= k1;
+                        entityitem = new EntityItem(world, (double)((float)x + f), (double)((float)y + f1), (double)((float)z + f2), new ItemStack(stack.itemID, k1, stack.getItemDamage()));
+                        float f3 = 0.05F;
+                        entityitem.motionX = (double)((float)world.rand.nextGaussian() * f3);
+                        entityitem.motionY = (double)((float)world.rand.nextGaussian() * f3 + 0.2F);
+                        entityitem.motionZ = (double)((float)world.rand.nextGaussian() * f3);
+
+                        if (stack.hasTagCompound())
+                        {
+                            entityitem.getEntityItem().setTagCompound((NBTTagCompound)stack.getTagCompound().copy());
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

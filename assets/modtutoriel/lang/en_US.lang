@@ -36,3 +36,6 @@ item.TutorialHoe.name=Tutorial Hoe
 
 #CreativeTabs
 itemGroup.TutorialCreativeTabs=Tutorial Creative Table
+
+#Container
+container.bigchest=Big Chest
