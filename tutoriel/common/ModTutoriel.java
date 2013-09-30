@@ -63,7 +63,7 @@ public class ModTutoriel
 			StairsTutorialID = cfg.getBlock("Stair Tutoriel", 2002).getInt();
 			DoubleSlabTutoID = cfg.getBlock("Double Slab Tutoriel", 2003).getInt();
 			SingleSlabTutoID = cfg.getBlock("Single Slab Tutoriel", 2004).getInt();
-			utorialGateauID = cfg.getBlock("Gateau Tutoriel", 2005).getInt();
+			TutorialGateauID = cfg.getBlock("Gateau Tutoriel", 2005).getInt();
 
 			ItemTutorialID = cfg.getItem("Item Tutoriel", 12000).getInt();
 			ItemWithMetadataID = cfg.getItem("Item With Metadata", 12001).getInt();
