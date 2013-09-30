@@ -41,7 +41,7 @@ public class ModTutoriel
 
 	public static int BlockTutorialID, TutorialMetadataID, StairsTutorialID, DoubleSlabTutoID, SingleSlabTutoID, ItemTutorialID,
 	ItemWithMetadataID, TutorialHelmetID, TutorialChestPlateID, TutorialLeggingsID, TutorialBootsID, TutorialEggID, 
-	TutorialSwordID, TutorialPickaxeID, TutorialAxeID, TutorialShovelID, TutorialHoeID;
+	TutorialSwordID, TutorialPickaxeID, TutorialAxeID, TutorialShovelID, TutorialHoeID, TutorialGateauID;
 
 	static EnumArmorMaterial TutorialArmor = EnumHelper.addArmorMaterial("Tutorial", 20, new int[] {2, 8, 4, 2}, 15);
 	static EnumToolMaterial TutorialMaterial = EnumHelper.addToolMaterial("Tutorial", 3, 761, 14.0F, 4, 5);
@@ -77,7 +77,7 @@ public class ModTutoriel
 			TutorialAxeID = cfg.getItem("Tutorial Axe", 12009).getInt();
 			TutorialShovelID = cfg.getItem("Tutorial Shovel", 12010).getInt();
 			TutorialHoeID = cfg.getItem("Tutorial Hoe", 12011).getInt();
-			TutorialGateauItemID = cfg.getItem("Gateau Turorial Item", 12012).getInt():
+			TutorialGateauItemID = cfg.getItem("Gateau Tutorial Item", 12012).getInt():
 		}
 		catch(Exception ex)
 		{
@@ -111,6 +111,7 @@ public class ModTutoriel
 		GameRegistry.registerBlock(StairsTutorial, "StairTutorial");
 		GameRegistry.registerBlock(DoubleSlabTuto, ItemBlockTutorialSlab.class, "DoubleSlabTuto");
 		GameRegistry.registerBlock(SingleSlabTuto, ItemBlockTutorialSlab.class, "SingleSlabTuto");
+		GameRegistry.registerBlock(TutorialGateau, "TutorialGateau");
 
 		// Items
 		ItemTutorial = new ItemTutorial(ItemTutorialID).setUnlocalizedName("ItemTutorial").setTextureName("modtutoriel:ItemTutorial");
