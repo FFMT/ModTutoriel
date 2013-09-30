@@ -35,9 +35,9 @@ public class ModTutoriel
 	public static ModTutoriel instance;
 
 	// declaration des blocs - blocks statement
-	public static Block BlockTutorial, TutorialMetadata, StairsTutorial, DoubleSlabTuto, SingleSlabTuto;
+	public static Block BlockTutorial, TutorialMetadata, StairsTutorial, DoubleSlabTuto, SingleSlabTuto, TutorialGateau;
 	public static Item ItemTutorial, ItemWithMetadata, TutorialHelmet, TutorialChestPlate, TutorialLeggings, TutorialBoots,
-	TutorialEgg, TutorialSword, TutorialPickaxe, TutorialAxe, TutorialShovel, TutorialHoe;
+	TutorialEgg, TutorialSword, TutorialPickaxe, TutorialAxe, TutorialShovel, TutorialHoe, TutorialGateauItem;
 
 	public static int BlockTutorialID, TutorialMetadataID, StairsTutorialID, DoubleSlabTutoID, SingleSlabTutoID, ItemTutorialID,
 	ItemWithMetadataID, TutorialHelmetID, TutorialChestPlateID, TutorialLeggingsID, TutorialBootsID, TutorialEggID, 
@@ -57,11 +57,13 @@ public class ModTutoriel
 		try
 		{
 			cfg.load();
+		
 			BlockTutorialID = cfg.getBlock("Block Tutoriel", 2000, "this is a comment").getInt();
 			TutorialMetadataID = cfg.getBlock("Block Tutoriel Metadata", 2001).getInt();
 			StairsTutorialID = cfg.getBlock("Stair Tutoriel", 2002).getInt();
 			DoubleSlabTutoID = cfg.getBlock("Double Slab Tutoriel", 2003).getInt();
 			SingleSlabTutoID = cfg.getBlock("Single Slab Tutoriel", 2004).getInt();
+			TutorialGateauID = cfg.getBlock("Gateau Tutoriel", 2005).getInt();
 
 			ItemTutorialID = cfg.getItem("Item Tutoriel", 12000).getInt();
 			ItemWithMetadataID = cfg.getItem("Item With Metadata", 12001).getInt();
@@ -75,6 +77,7 @@ public class ModTutoriel
 			TutorialAxeID = cfg.getItem("Tutorial Axe", 12009).getInt();
 			TutorialShovelID = cfg.getItem("Tutorial Shovel", 12010).getInt();
 			TutorialHoeID = cfg.getItem("Tutorial Hoe", 12011).getInt();
+			TutorialGateauItemID = cfg.getItem("Gateau Turorial Item", 12012).getInt():
 		}
 		catch(Exception ex)
 		{
@@ -100,6 +103,7 @@ public class ModTutoriel
 		TutorialMetadata = new BlockTutorialMetadata(TutorialMetadataID).setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("TutorialMetadata");
 		DoubleSlabTuto = new BlockSlabTutorial(DoubleSlabTutoID, true).setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("TutorialSlab");
 		SingleSlabTuto = new BlockSlabTutorial(SingleSlabTutoID, false).setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("TutorialSlab");
+		TutorialGateau = new TutorialGateau(TutoGateauID).setHardness(0.5F).setStepSound(Block.soundClothFootstep).setUnlocalizedName("TutorialGateau");
 		
 		// Enregistrement des blocs - Blocks registry
 		GameRegistry.registerBlock(BlockTutorial, "BlockTutorial");
@@ -121,6 +125,7 @@ public class ModTutoriel
 		TutorialAxe = new TutorialAxe(TutorialAxeID, TutorialMaterial).setUnlocalizedName("TutorialAxe").setTextureName("modtutoriel:TutorialAxe");
 		TutorialShovel = new TutorialShovel(TutorialShovelID, TutorialMaterial).setUnlocalizedName("TutorialShovel").setTextureName("modtutoriel:TutorialShovel");
 		TutorialHoe = new TutorialHoe(TutorialHoeID, TutorialMaterial).setUnlocalizedName("TutorialHoe").setTextureName("modtutoriel:TutorialHoe");
+		TutorialGateauItem = new TutorialGateauItem(TutorialGateauItemID).setUnlocalizedName("TurorialGateauItem").setTextureName("modtutoriel:TutorialCake");
 
 		// Enregistrement des items - Item registry
 		GameRegistry.registerItem(ItemTutorial, "ItemTutorial", "ModTutoriel");
@@ -135,6 +140,7 @@ public class ModTutoriel
 		GameRegistry.registerItem(TutorialAxe, "TutorialAxe", "ModTutoriel");
 		GameRegistry.registerItem(TutorialShovel, "TutorialShovel", "ModTutoriel");
 		GameRegistry.registerItem(TutorialHoe, "TutorialHoe", "ModTutoriel");
+		GameRegistry.registerItem(TutorialGateauItem, "TutorialGateauItem", "TutorialGateauItem");
 
 		// Achievements
 	}
