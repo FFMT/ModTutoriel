@@ -148,7 +148,7 @@ public class ModTutoriel
 		// Registry
 		GameRegistry.registerTileEntity(TileEntityTutorial.class, "TileEntityTutorial");
 		GameRegistry.registerTileEntity(TileEntityTutorial2.class, "TileEntityTutorial2");
-		GameRegistry.registerTileEntity(TileEntityBigChest.class, "TileEntityBigChest");
+		GameRegistry.registerTileEntity(TileEntityBigChest.class, "BigChest");
 		
 		NetworkRegistry.instance().registerGuiHandler(this.instance, new GuiHandlerTutorial());
 

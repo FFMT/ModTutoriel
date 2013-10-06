@@ -1,9 +1,9 @@
 package tutoriel.common;
 
-import tutoriel.client.GuiBigChest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import tutoriel.client.GuiBigChest;
 import cpw.mods.fml.common.network.IGuiHandler;
 
 public class GuiHandlerTutorial implements IGuiHandler

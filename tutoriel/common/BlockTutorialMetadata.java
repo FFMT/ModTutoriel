@@ -91,7 +91,7 @@ public class BlockTutorialMetadata extends BlockContainer
 		case 1:
 			return side > 1 ? Icon2[side - 1] : Icon2[0];
 		case 2:
-			return side < 4 ? Icon3[side] : Icon3[3];
+			return side == 1 ? Icon3[0] : side == 0 ? Icon3[1] : side == 3 ? Icon3[2] : Icon3[3];
 		case 3:
 			return side < 3 ? Icon4[side] : Icon4[2];
 		case 4:
@@ -136,7 +136,7 @@ public class BlockTutorialMetadata extends BlockContainer
 
 	public boolean hasTileEntity(int metadata)
 	{
-		if(metadata == 0 || metadata == 2 || metadata == 3)
+		if(metadata == 0 || metadata == 1 || metadata == 2 || metadata == 3)
 			return true;
 		else
 			return false;
@@ -147,14 +147,15 @@ public class BlockTutorialMetadata extends BlockContainer
 	{
 		if(blockaccess.getBlockMetadata(x, y, z) == 2)
 		{
-			TileEntityTutorial2 te = (TileEntityTutorial2)blockaccess.getBlockTileEntity(x, y, z);
-			byte direction = te.getDirection();
-			return side == 1 ? Icon3[0] : (side == 0 ? Icon3[1] : (direction == 2 && side == 2 ? Icon3[2] : (direction == 3 && side == 5 ? Icon3[2] : (direction == 0 && side == 3 ? Icon3[2] : (direction == 1 && side == 4 ? Icon3[2] : Icon3[3])))));
+			TileEntity te = blockaccess.getBlockTileEntity(x, y, z);
+			if(te != null && te instanceof TileEntityTutorial2)
+			{
+				TileEntityTutorial2 tetuto = (TileEntityTutorial2)te;
+				int direction = tetuto.getDirection();
+				return side == 1 ? Icon3[0] : (side == 0 ? Icon3[1] : (direction == 2 && side == 2 ? Icon3[2] : (direction == 3 && side == 5 ? Icon3[2] : (direction == 0 && side == 3 ? Icon3[2] : (direction == 1 && side == 4 ? Icon3[2] : Icon3[3])))));
+			}
 		}
-		else
-		{
-			return this.getIcon(side, blockaccess.getBlockMetadata(x, y, z));
-		}
+		return this.getIcon(side, blockaccess.getBlockMetadata(x, y, z));
 	}
 
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9)
@@ -170,7 +171,7 @@ public class BlockTutorialMetadata extends BlockContainer
 			return true;
 		}
 		
-		if(world.getBlockMetadata(x, y, z) == 3)
+		if(world.getBlockMetadata(x, y, z) == 3 || world.getBlockMetadata(x, y, z) == 1)
 		{
 			FMLNetworkHandler.openGui(player, ModTutoriel.instance, 0, world, x, y, z);
 			return true;
@@ -184,7 +185,7 @@ public class BlockTutorialMetadata extends BlockContainer
 		TileEntity te = world.getBlockTileEntity(x, y, z);
 		if(te != null && stack.getItemDamage() == 2 && te instanceof TileEntityTutorial2)
 		{
-			((TileEntityTutorial2)te).setDirection((byte)direction);
+			((TileEntityTutorial2)te).setDirection(direction);
 			world.markBlockForUpdate(x, y, z);
 		}
 		if(te != null && stack.getItemDamage() == 3 && te instanceof TileEntityBigChest && stack.hasDisplayName())
