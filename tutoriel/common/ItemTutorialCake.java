@@ -7,9 +7,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class ItemTutoGateau extends Item
+public class ItemTutorialCake extends Item
 {
-    public ItemTutoGateau(int id)
+    public ItemTutorialCake(int id)
     {
         super(id);
         this.setCreativeTab(ModTutoriel.TutorialCreativeTabs);
@@ -64,9 +64,12 @@ public class ItemTutoGateau extends Item
             if (Block.redstoneWire.canPlaceBlockAt(world, x, y, z))
             {
                 --ItemStack.stackSize;
-                world.setBlock(x, y, z, ModTutoriel.TutorielGateau.blockID);
+                world.setBlock(x, y, z, ModTutoriel.BlockTutorialCake.blockID);
+				String placesound = ModTutoriel.BlockTutorialCake.stepSound.getPlaceSound();
+				float volume = ModTutoriel.BlockTutorialCake.stepSound.getVolume();
+				float pitch = ModTutoriel.BlockTutorialCake.stepSound.getPitch();
+				world.playSoundEffect(x, y, z, placesound, volume, pitch);
             }
-
             return true;
         }
     }
