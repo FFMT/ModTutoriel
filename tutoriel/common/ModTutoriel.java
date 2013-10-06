@@ -157,6 +157,8 @@ public class ModTutoriel
 		GameRegistry.registerTileEntity(TileEntityTutorial2.class, "TileEntityTutorial2");
 		GameRegistry.registerTileEntity(TileEntityBigChest.class, "BigChest");
 		
+		GameRegistry.registerWorldGenerator(new WorldGeneratorTutoriel());
+		
 		NetworkRegistry.instance().registerGuiHandler(this.instance, new GuiHandlerTutorial());
 
 		// Tools
