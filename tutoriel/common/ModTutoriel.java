@@ -2,10 +2,12 @@ package tutoriel.common;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.EnumHelper;
 import net.minecraftforge.common.MinecraftForge;
@@ -20,9 +22,9 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.TickRegistry;
-import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 
 @Mod(modid = "ModTutoriel", name = "Mod Tutoriel", version = "1.0.0", acceptedMinecraftVersions = "[1.6.2,)")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
@@ -36,12 +38,9 @@ public class ModTutoriel
 
 	// declaration des blocs - blocks statement
 	public static Block BlockTutorial, TutorialMetadata, StairsTutorial, DoubleSlabTuto, SingleSlabTuto, BlockTutorialCake;
-	public static Item ItemTutorial, ItemWithMetadata, TutorialHelmet, TutorialChestPlate, TutorialLeggings, TutorialBoots,
-	TutorialEgg, TutorialSword, TutorialPickaxe, TutorialAxe, TutorialShovel, TutorialHoe, ItemTutorialCake;
+	public static Item ItemTutorial, ItemWithMetadata, TutorialHelmet, TutorialChestPlate, TutorialLeggings, TutorialBoots, TutorialEgg, TutorialSword, TutorialPickaxe, TutorialAxe, TutorialShovel, TutorialHoe, ItemTutorialCake;
 
-	public static int BlockTutorialID, TutorialMetadataID, StairsTutorialID, DoubleSlabTutoID, SingleSlabTutoID, ItemTutorialID,
-	ItemWithMetadataID, TutorialHelmetID, TutorialChestPlateID, TutorialLeggingsID, TutorialBootsID, TutorialEggID, 
-	TutorialSwordID, TutorialPickaxeID, TutorialAxeID, TutorialShovelID, TutorialHoeID, BlockTutorialCakeID, ItemTutorialCakeID;
+	public static int BlockTutorialID, TutorialMetadataID, StairsTutorialID, DoubleSlabTutoID, SingleSlabTutoID, ItemTutorialID, ItemWithMetadataID, TutorialHelmetID, TutorialChestPlateID, TutorialLeggingsID, TutorialBootsID, TutorialEggID, TutorialSwordID, TutorialPickaxeID, TutorialAxeID, TutorialShovelID, TutorialHoeID, BlockTutorialCakeID, ItemTutorialCakeID;
 
 	static EnumArmorMaterial TutorialArmor = EnumHelper.addArmorMaterial("Tutorial", 20, new int[] {2, 8, 4, 2}, 15);
 	static EnumToolMaterial TutorialMaterial = EnumHelper.addToolMaterial("Tutorial", 3, 761, 14.0F, 4, 5);
@@ -57,7 +56,7 @@ public class ModTutoriel
 		try
 		{
 			cfg.load();
-		
+
 			BlockTutorialID = cfg.getBlock("Block Tutoriel", 2000, "this is a comment").getInt();
 			TutorialMetadataID = cfg.getBlock("Block Tutoriel Metadata", 2001).getInt();
 			StairsTutorialID = cfg.getBlock("Stair Tutoriel", 2002).getInt();
@@ -104,7 +103,7 @@ public class ModTutoriel
 		DoubleSlabTuto = new BlockSlabTutorial(DoubleSlabTutoID, true).setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("TutorialSlab");
 		SingleSlabTuto = new BlockSlabTutorial(SingleSlabTutoID, false).setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("TutorialSlab");
 		BlockTutorialCake = new BlockCakeTutorial(BlockTutorialCakeID).setHardness(0.5F).setStepSound(Block.soundClothFootstep).setUnlocalizedName("TutorialGateau");
-		
+
 		// Enregistrement des blocs - Blocks registry
 		GameRegistry.registerBlock(BlockTutorial, "BlockTutorial");
 		GameRegistry.registerBlock(TutorialMetadata, ItemBlockTutorialMetadata.class, "TutorialMetadata", "ModTutoriel");
@@ -143,6 +142,10 @@ public class ModTutoriel
 		GameRegistry.registerItem(TutorialHoe, "TutorialHoe", "ModTutoriel");
 		GameRegistry.registerItem(ItemTutorialCake, "TutorialGateauItem", "ModTutoriel");
 
+		EntityRegistry.registerGlobalEntityID(MobTutorialHealthBar.class, "MobTutorielHealthBar", EntityRegistry.findGlobalUniqueEntityId(), 0, 0);
+		EntityRegistry.registerModEntity(MobTutorialHealthBar.class, "MobTutorialHealthBar", 1254, this, 100, 1, true);
+		EntityRegistry.addSpawn(MobTutorialHealthBar.class, 0, 1, 2, EnumCreatureType.creature, BiomeGenBase.forest, BiomeGenBase.plains, BiomeGenBase.extremeHills);
+
 		// Achievements
 	}
 
@@ -156,9 +159,9 @@ public class ModTutoriel
 		GameRegistry.registerTileEntity(TileEntityTutorial.class, "TileEntityTutorial");
 		GameRegistry.registerTileEntity(TileEntityTutorial2.class, "TileEntityTutorial2");
 		GameRegistry.registerTileEntity(TileEntityBigChest.class, "BigChest");
-		
+
 		GameRegistry.registerWorldGenerator(new WorldGeneratorTutoriel());
-		
+
 		NetworkRegistry.instance().registerGuiHandler(this.instance, new GuiHandlerTutorial());
 
 		// Tools
