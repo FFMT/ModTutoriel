@@ -1,6 +1,9 @@
 package tutoriel.common;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockFence;
+import net.minecraft.block.BlockWall;
+import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.EnumArmorMaterial;
@@ -37,10 +40,10 @@ public class ModTutoriel
 	public static ModTutoriel instance;
 
 	// declaration des blocs - blocks statement
-	public static Block BlockTutorial, TutorialMetadata, StairsTutorial, DoubleSlabTuto, SingleSlabTuto, BlockTutorialCake;
+	public static Block BlockTutorial, TutorialMetadata, StairsTutorial, DoubleSlabTuto, SingleSlabTuto, BlockTutorialCake, BlockNewFenceTutorial, BlockNewWallTutorial;
 	public static Item ItemTutorial, ItemWithMetadata, TutorialHelmet, TutorialChestPlate, TutorialLeggings, TutorialBoots, TutorialEgg, TutorialSword, TutorialPickaxe, TutorialAxe, TutorialShovel, TutorialHoe, ItemTutorialCake;
 
-	public static int BlockTutorialID, TutorialMetadataID, StairsTutorialID, DoubleSlabTutoID, SingleSlabTutoID, ItemTutorialID, ItemWithMetadataID, TutorialHelmetID, TutorialChestPlateID, TutorialLeggingsID, TutorialBootsID, TutorialEggID, TutorialSwordID, TutorialPickaxeID, TutorialAxeID, TutorialShovelID, TutorialHoeID, BlockTutorialCakeID, ItemTutorialCakeID;
+	public static int BlockTutorialID, TutorialMetadataID, StairsTutorialID, DoubleSlabTutoID, SingleSlabTutoID, ItemTutorialID, ItemWithMetadataID, TutorialHelmetID, TutorialChestPlateID, TutorialLeggingsID, TutorialBootsID, TutorialEggID, TutorialSwordID, TutorialPickaxeID, TutorialAxeID, TutorialShovelID, TutorialHoeID, BlockTutorialCakeID, ItemTutorialCakeID, BlockNewFenceTutorialID, BlockNewWallTutorialID;
 
 	static EnumArmorMaterial TutorialArmor = EnumHelper.addArmorMaterial("Tutorial", 20, new int[] {2, 8, 4, 2}, 15);
 	static EnumToolMaterial TutorialMaterial = EnumHelper.addToolMaterial("Tutorial", 3, 761, 14.0F, 4, 5);
@@ -63,6 +66,8 @@ public class ModTutoriel
 			DoubleSlabTutoID = cfg.getBlock("Double Slab Tutoriel", 2003).getInt();
 			SingleSlabTutoID = cfg.getBlock("Single Slab Tutoriel", 2004).getInt();
 			BlockTutorialCakeID = cfg.getBlock("Gateau Tutoriel", 2005).getInt();
+			BlockNewFenceTutorialID = cfg.getBlock("Fence", 2006).getInt();
+			BlockNewWallTutorialID = cfg.getBlock("Wall", 2007).getInt();
 
 			ItemTutorialID = cfg.getItem("Item Tutoriel", 12000).getInt();
 			ItemWithMetadataID = cfg.getItem("Item With Metadata", 12001).getInt();
@@ -103,7 +108,9 @@ public class ModTutoriel
 		DoubleSlabTuto = new BlockSlabTutorial(DoubleSlabTutoID, true).setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("TutorialSlab");
 		SingleSlabTuto = new BlockSlabTutorial(SingleSlabTutoID, false).setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("TutorialSlab");
 		BlockTutorialCake = new BlockCakeTutorial(BlockTutorialCakeID).setHardness(0.5F).setStepSound(Block.soundClothFootstep).setUnlocalizedName("TutorialGateau");
-
+		BlockNewFenceTutorial = new BlockFence(BlockNewFenceTutorialID, "snow", Material.snow).setUnlocalizedName("TutorialFence").setCreativeTab(ModTutoriel.TutorialCreativeTabs);
+		BlockNewWallTutorial = new BlockTutorialWall(BlockNewWallTutorialID, Block.snow).setUnlocalizedName("TutorialWall").setCreativeTab(ModTutoriel.TutorialCreativeTabs);
+		
 		// Enregistrement des blocs - Blocks registry
 		GameRegistry.registerBlock(BlockTutorial, "BlockTutorial");
 		GameRegistry.registerBlock(TutorialMetadata, ItemBlockTutorialMetadata.class, "TutorialMetadata", "ModTutoriel");
@@ -111,6 +118,8 @@ public class ModTutoriel
 		GameRegistry.registerBlock(DoubleSlabTuto, ItemBlockTutorialSlab.class, "DoubleSlabTuto");
 		GameRegistry.registerBlock(SingleSlabTuto, ItemBlockTutorialSlab.class, "SingleSlabTuto");
 		GameRegistry.registerBlock(BlockTutorialCake, "TutorialGateau");
+		GameRegistry.registerBlock(BlockNewFenceTutorial, "TutorialFence");
+		GameRegistry.registerBlock(BlockNewWallTutorial, "TutorialWall");
 
 		// Items
 		ItemTutorial = new ItemTutorial(ItemTutorialID).setUnlocalizedName("ItemTutorial").setTextureName("modtutoriel:ItemTutorial");
