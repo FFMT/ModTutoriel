@@ -13,6 +13,7 @@ public class EventSoundTutorial
 			event.manager.addSound("modtutoriel:explosion1.ogg");
 			event.manager.addSound("modtutoriel:explosion2.ogg");
 			event.manager.addSound("modtutoriel:explosion3.ogg");
+			event.manager.addStreaming("modtutoriel:cd.ogg");
 		}
 		catch(Exception e)
 		{

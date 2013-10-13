@@ -41,9 +41,9 @@ public class ModTutoriel
 
 	// declaration des blocs - blocks statement
 	public static Block BlockTutorial, TutorialMetadata, StairsTutorial, DoubleSlabTuto, SingleSlabTuto, BlockTutorialCake, BlockNewFenceTutorial, BlockNewWallTutorial;
-	public static Item ItemTutorial, ItemWithMetadata, TutorialHelmet, TutorialChestPlate, TutorialLeggings, TutorialBoots, TutorialEgg, TutorialSword, TutorialPickaxe, TutorialAxe, TutorialShovel, TutorialHoe, ItemTutorialCake;
+	public static Item ItemTutorial, ItemWithMetadata, TutorialHelmet, TutorialChestPlate, TutorialLeggings, TutorialBoots, TutorialEgg, TutorialSword, TutorialPickaxe, TutorialAxe, TutorialShovel, TutorialHoe, ItemTutorialCake, ItemCdTutorial;
 
-	public static int BlockTutorialID, TutorialMetadataID, StairsTutorialID, DoubleSlabTutoID, SingleSlabTutoID, ItemTutorialID, ItemWithMetadataID, TutorialHelmetID, TutorialChestPlateID, TutorialLeggingsID, TutorialBootsID, TutorialEggID, TutorialSwordID, TutorialPickaxeID, TutorialAxeID, TutorialShovelID, TutorialHoeID, BlockTutorialCakeID, ItemTutorialCakeID, BlockNewFenceTutorialID, BlockNewWallTutorialID;
+	public static int BlockTutorialID, TutorialMetadataID, StairsTutorialID, DoubleSlabTutoID, SingleSlabTutoID, ItemTutorialID, ItemWithMetadataID, TutorialHelmetID, TutorialChestPlateID, TutorialLeggingsID, TutorialBootsID, TutorialEggID, TutorialSwordID, TutorialPickaxeID, TutorialAxeID, TutorialShovelID, TutorialHoeID, BlockTutorialCakeID, ItemTutorialCakeID, BlockNewFenceTutorialID, BlockNewWallTutorialID, ItemCdTutorialID;
 
 	static EnumArmorMaterial TutorialArmor = EnumHelper.addArmorMaterial("Tutorial", 20, new int[] {2, 8, 4, 2}, 15);
 	static EnumToolMaterial TutorialMaterial = EnumHelper.addToolMaterial("Tutorial", 3, 761, 14.0F, 4, 5);
@@ -82,6 +82,7 @@ public class ModTutoriel
 			TutorialShovelID = cfg.getItem("Tutorial Shovel", 12010).getInt();
 			TutorialHoeID = cfg.getItem("Tutorial Hoe", 12011).getInt();
 			ItemTutorialCakeID = cfg.getItem("Gateau Tutorial Item", 12012).getInt();
+			ItemCdTutorialID = cfg.getItem("Cd tutorial", 12013).getInt();
 		}
 		catch(Exception ex)
 		{
@@ -110,6 +111,7 @@ public class ModTutoriel
 		BlockTutorialCake = new BlockCakeTutorial(BlockTutorialCakeID).setHardness(0.5F).setStepSound(Block.soundClothFootstep).setUnlocalizedName("TutorialGateau");
 		BlockNewFenceTutorial = new BlockFence(BlockNewFenceTutorialID, "snow", Material.snow).setUnlocalizedName("TutorialFence").setCreativeTab(ModTutoriel.TutorialCreativeTabs);
 		BlockNewWallTutorial = new BlockTutorialWall(BlockNewWallTutorialID, Block.snow).setUnlocalizedName("TutorialWall").setCreativeTab(ModTutoriel.TutorialCreativeTabs);
+		ItemCdTutorial = new ItemCdTutorial(ItemCdTutorialID, "modtutoriel:cd").setUnlocalizedName("cdTutorial").setCreativeTab(ModTutoriel.TutorialCreativeTabs);
 		
 		// Enregistrement des blocs - Blocks registry
 		GameRegistry.registerBlock(BlockTutorial, "BlockTutorial");
