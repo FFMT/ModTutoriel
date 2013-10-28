@@ -2,7 +2,6 @@ package tutoriel.common;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFence;
-import net.minecraft.block.BlockWall;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EnumCreatureType;
@@ -14,7 +13,11 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.EnumHelper;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidRegistry;
 import tutoriel.client.EventSoundTutorial;
+import tutoriel.client.TextureEvent;
 import tutoriel.proxy.TutoCommonProxy;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -27,7 +30,6 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
 @Mod(modid = "ModTutoriel", name = "Mod Tutoriel", version = "1.0.0", acceptedMinecraftVersions = "[1.6.2,)")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
@@ -40,10 +42,12 @@ public class ModTutoriel
 	public static ModTutoriel instance;
 
 	// declaration des blocs - blocks statement
-	public static Block BlockTutorial, TutorialMetadata, StairsTutorial, DoubleSlabTuto, SingleSlabTuto, BlockTutorialCake, BlockNewFenceTutorial, BlockNewWallTutorial;
-	public static Item ItemTutorial, ItemWithMetadata, TutorialHelmet, TutorialChestPlate, TutorialLeggings, TutorialBoots, TutorialEgg, TutorialSword, TutorialPickaxe, TutorialAxe, TutorialShovel, TutorialHoe, ItemTutorialCake, ItemCdTutorial;
+	public static Block BlockTutorial, TutorialMetadata, StairsTutorial, DoubleSlabTuto, SingleSlabTuto, BlockTutorialCake, BlockNewFenceTutorial, BlockNewWallTutorial, blockFluidTutorial;
+	public static Item ItemTutorial, ItemWithMetadata, TutorialHelmet, TutorialChestPlate, TutorialLeggings, TutorialBoots, TutorialEgg, TutorialSword, TutorialPickaxe, TutorialAxe, TutorialShovel, TutorialHoe, ItemTutorialCake, ItemCdTutorial, bucketTutorial;
+	public static Fluid fluidTutorial;
 
-	public static int BlockTutorialID, TutorialMetadataID, StairsTutorialID, DoubleSlabTutoID, SingleSlabTutoID, ItemTutorialID, ItemWithMetadataID, TutorialHelmetID, TutorialChestPlateID, TutorialLeggingsID, TutorialBootsID, TutorialEggID, TutorialSwordID, TutorialPickaxeID, TutorialAxeID, TutorialShovelID, TutorialHoeID, BlockTutorialCakeID, ItemTutorialCakeID, BlockNewFenceTutorialID, BlockNewWallTutorialID, ItemCdTutorialID;
+	public static int BlockTutorialID, TutorialMetadataID, StairsTutorialID, DoubleSlabTutoID, SingleSlabTutoID, fluidTutorialID, ItemTutorialID, ItemWithMetadataID, TutorialHelmetID, TutorialChestPlateID, TutorialLeggingsID, TutorialBootsID, TutorialEggID, TutorialSwordID, TutorialPickaxeID, TutorialAxeID, TutorialShovelID, TutorialHoeID, BlockTutorialCakeID, ItemTutorialCakeID,
+			BlockNewFenceTutorialID, BlockNewWallTutorialID, ItemCdTutorialID, bucketTutorialID;
 
 	static EnumArmorMaterial TutorialArmor = EnumHelper.addArmorMaterial("Tutorial", 20, new int[] {2, 8, 4, 2}, 15);
 	static EnumToolMaterial TutorialMaterial = EnumHelper.addToolMaterial("Tutorial", 3, 761, 14.0F, 4, 5);
@@ -68,6 +72,7 @@ public class ModTutoriel
 			BlockTutorialCakeID = cfg.getBlock("Gateau Tutoriel", 2005).getInt();
 			BlockNewFenceTutorialID = cfg.getBlock("Fence", 2006).getInt();
 			BlockNewWallTutorialID = cfg.getBlock("Wall", 2007).getInt();
+			fluidTutorialID = cfg.getBlock("Fluid", 2008).getInt();
 
 			ItemTutorialID = cfg.getItem("Item Tutoriel", 12000).getInt();
 			ItemWithMetadataID = cfg.getItem("Item With Metadata", 12001).getInt();
@@ -83,6 +88,7 @@ public class ModTutoriel
 			TutorialHoeID = cfg.getItem("Tutorial Hoe", 12011).getInt();
 			ItemTutorialCakeID = cfg.getItem("Gateau Tutorial Item", 12012).getInt();
 			ItemCdTutorialID = cfg.getItem("Cd tutorial", 12013).getInt();
+			bucketTutorialID = cfg.getItem("Bucket Tutorial", 12014).getInt();
 		}
 		catch(Exception ex)
 		{
@@ -102,6 +108,11 @@ public class ModTutoriel
 			MinecraftForge.EVENT_BUS.register(new EventSoundTutorial());
 		}
 
+		// Fluid
+		fluidTutorial = new Fluid("tutorial").setDensity(4000).setViscosity(500).setTemperature(286).setLuminosity(10).setUnlocalizedName("tutorial");
+		FluidRegistry.registerFluid(fluidTutorial);
+		fluidTutorial = FluidRegistry.getFluid("tutorial");
+
 		// Blocks
 		BlockTutorial = new BlockTutorial(BlockTutorialID).setHardness(1.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("BlockTutorial");
 		StairsTutorial = new BlockStairsTutorial(StairsTutorialID, BlockTutorial, 0).setUnlocalizedName("StairsTutorial");
@@ -111,8 +122,18 @@ public class ModTutoriel
 		BlockTutorialCake = new BlockCakeTutorial(BlockTutorialCakeID).setHardness(0.5F).setStepSound(Block.soundClothFootstep).setUnlocalizedName("TutorialGateau");
 		BlockNewFenceTutorial = new BlockFence(BlockNewFenceTutorialID, "snow", Material.snow).setUnlocalizedName("TutorialFence").setCreativeTab(ModTutoriel.TutorialCreativeTabs);
 		BlockNewWallTutorial = new BlockTutorialWall(BlockNewWallTutorialID, Block.snow).setUnlocalizedName("TutorialWall").setCreativeTab(ModTutoriel.TutorialCreativeTabs);
-		ItemCdTutorial = new ItemCdTutorial(ItemCdTutorialID, "modtutoriel:cd").setUnlocalizedName("cdTutorial").setCreativeTab(ModTutoriel.TutorialCreativeTabs);
-		
+
+		if(fluidTutorial.getBlockID() == -1)
+		{
+			blockFluidTutorial = new BlockFluidTutorial(fluidTutorialID, fluidTutorial, Material.water).setUnlocalizedName("fluidTutorial");
+			GameRegistry.registerBlock(blockFluidTutorial, "fluidTutorial");
+			fluidTutorial.setBlockID(blockFluidTutorial);
+		}
+		else
+		{
+			blockFluidTutorial = Block.blocksList[fluidTutorial.getBlockID()];
+		}
+
 		// Enregistrement des blocs - Blocks registry
 		GameRegistry.registerBlock(BlockTutorial, "BlockTutorial");
 		GameRegistry.registerBlock(TutorialMetadata, ItemBlockTutorialMetadata.class, "TutorialMetadata", "ModTutoriel");
@@ -137,7 +158,9 @@ public class ModTutoriel
 		TutorialShovel = new TutorialShovel(TutorialShovelID, TutorialMaterial).setUnlocalizedName("TutorialShovel").setTextureName("modtutoriel:TutorialShovel");
 		TutorialHoe = new TutorialHoe(TutorialHoeID, TutorialMaterial).setUnlocalizedName("TutorialHoe").setTextureName("modtutoriel:TutorialHoe");
 		ItemTutorialCake = new ItemTutorialCake(ItemTutorialCakeID).setUnlocalizedName("TurorialGateauItem").setTextureName("modtutoriel:TutorialCake");
-
+		ItemCdTutorial = new ItemCdTutorial(ItemCdTutorialID, "modtutoriel:cd").setUnlocalizedName("cdTutorial").setCreativeTab(ModTutoriel.TutorialCreativeTabs);
+		bucketTutorial = new ItemBucketTutorial(bucketTutorialID, blockFluidTutorial.blockID).setUnlocalizedName("bucketTutorial").setTextureName("modtutoriel:bucketTutorial");
+		
 		// Enregistrement des items - Item registry
 		GameRegistry.registerItem(ItemTutorial, "ItemTutorial", "ModTutoriel");
 		GameRegistry.registerItem(ItemWithMetadata, "ItemWithMetadata", "ModTutoriel");
@@ -152,6 +175,9 @@ public class ModTutoriel
 		GameRegistry.registerItem(TutorialShovel, "TutorialShovel", "ModTutoriel");
 		GameRegistry.registerItem(TutorialHoe, "TutorialHoe", "ModTutoriel");
 		GameRegistry.registerItem(ItemTutorialCake, "TutorialGateauItem", "ModTutoriel");
+		GameRegistry.registerItem(bucketTutorial, "BucketTutorial", "ModTutoriel");
+		
+		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluidStack("tutorial", FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(bucketTutorial), FluidContainerRegistry.EMPTY_BUCKET);
 
 		EntityRegistry.registerGlobalEntityID(MobTutorialHealthBar.class, "MobTutorielHealthBar", EntityRegistry.findGlobalUniqueEntityId(), 0, 0);
 		EntityRegistry.registerModEntity(MobTutorialHealthBar.class, "MobTutorialHealthBar", 1254, this, 100, 1, true);
@@ -165,6 +191,8 @@ public class ModTutoriel
 	{
 		// Event Bus
 		MinecraftForge.EVENT_BUS.register(new LivingEvent());
+		MinecraftForge.EVENT_BUS.register(new TextureEvent());
+		MinecraftForge.EVENT_BUS.register(new BucketEvent());
 
 		// Registry
 		GameRegistry.registerTileEntity(TileEntityTutorial.class, "TileEntityTutorial");

@@ -16,6 +16,10 @@ tile.TutorialSlab.tutometa1.name=Dalle tutoriel metadata 1
 tile.TutorialSlab.diamond.name=Dalle en diamant
 tile.TutorialSlab.gold.name=Dalle en or
 tile.TutorialSlab.iron.name=Dalle en fer
+tile.fluidTutorial.name=Fluide tutoriel
+
+#Fluid
+fluid.tutorial.name=Fluide tutoriel
 
 #Item
 item.ItemTutorial.name=Item Tutoriel

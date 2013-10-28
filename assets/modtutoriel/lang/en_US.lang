@@ -16,6 +16,10 @@ tile.TutorialSlab.tutometa1.name=Metadata Tutorial 1 Slab
 tile.TutorialSlab.diamond.name=Diamond Slab
 tile.TutorialSlab.gold.name=Gold Slab
 tile.TutorialSlab.iron.name=Iron Slab
+tile.fluidTutorial.name=Tutorial Fuild
+
+#Fluid
+fluid.tutorial.name=Tutorial Fuild
 
 #Item
 item.ItemTutorial.name=Item Tutorial
