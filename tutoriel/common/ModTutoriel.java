@@ -19,6 +19,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 import tutoriel.client.EventSoundTutorial;
 import tutoriel.client.TextureEvent;
 import tutoriel.proxy.TutoCommonProxy;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;

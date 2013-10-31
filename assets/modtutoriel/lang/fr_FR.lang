@@ -19,7 +19,7 @@ tile.TutorialSlab.iron.name=Dalle en fer
 tile.fluidTutorial.name=Fluide tutoriel
 
 #Fluid
-fluid.tutorial.name=Fluide tutoriel
+fluid.tutorial=Fluide tutoriel
 
 #Item
 item.ItemTutorial.name=Item Tutoriel
@@ -37,6 +37,7 @@ item.TutorialPickaxe.name=Pioche tutoriel
 item.TutorialAxe.name=Hache tutoriel
 item.TutorialShovel.name=Pelle tutoriel
 item.TutorialHoe.name=Houe tutoriel
+item.bucketTutorial.name=Seau tutoriel
 
 #CreativeTabs
 itemGroup.TutorialCreativeTabs=Tutoriel Table Créative

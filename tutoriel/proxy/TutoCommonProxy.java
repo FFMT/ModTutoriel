@@ -8,5 +8,4 @@ public class TutoCommonProxy
 		// nothing here, render = client
 
 	}
-
 }

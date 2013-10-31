@@ -10,5 +10,4 @@ public class TutoClientProxy extends TutoCommonProxy
 	{
 		RenderingRegistry.registerEntityRenderingHandler(MobTutorialHealthBar.class, new RenderMobTutorialHealthBar());
 	}
-
 }
