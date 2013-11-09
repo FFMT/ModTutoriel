@@ -27,6 +27,7 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
@@ -182,7 +183,10 @@ public class ModTutoriel
 
 		EntityRegistry.registerGlobalEntityID(MobTutorialHealthBar.class, "MobTutorielHealthBar", EntityRegistry.findGlobalUniqueEntityId(), 0, 0);
 		EntityRegistry.registerModEntity(MobTutorialHealthBar.class, "MobTutorialHealthBar", 1254, this, 100, 1, true);
-		EntityRegistry.addSpawn(MobTutorialHealthBar.class, 0, 1, 2, EnumCreatureType.creature, BiomeGenBase.forest, BiomeGenBase.plains, BiomeGenBase.extremeHills);
+		while(CommandTutoriel.spawn = true);
+		{
+			EntityRegistry.addSpawn(MobTutorialHealthBar.class, 0, 1, 2, EnumCreatureType.creature, BiomeGenBase.forest, BiomeGenBase.plains, BiomeGenBase.extremeHills);
+		}
 
 		// Achievements
 	}
@@ -227,5 +231,11 @@ public class ModTutoriel
 	public void PostInit(FMLPostInitializationEvent event)
 	{
 		// Integration avec les autres mods - integration with others mods
+	}
+	
+	@EventHandler
+	public void serverStarting(FMLServerStartingEvent event)
+	{
+		event.registerServerCommand(new CommandTutoriel());
 	}
 }

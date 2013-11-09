@@ -1,5 +1,8 @@
 #fr_FR - by robin4002
 
+#Commands
+commands.tutoriel.usage=/tutoriel <commands> <valeur>
+
 #Block
 tile.BlockTutorial.name=Bloc Tutoriel
 tile.TutorialMetadata.block1.name=Tutoriel metadata 1
