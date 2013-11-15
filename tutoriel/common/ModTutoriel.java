@@ -183,7 +183,7 @@ public class ModTutoriel
 
 		EntityRegistry.registerGlobalEntityID(MobTutorialHealthBar.class, "MobTutorielHealthBar", EntityRegistry.findGlobalUniqueEntityId(), 0, 0);
 		EntityRegistry.registerModEntity(MobTutorialHealthBar.class, "MobTutorialHealthBar", 1254, this, 100, 1, true);
-		while(CommandTutoriel.spawn = true);
+		if(CommandTutoriel.canSpawn)
 		{
 			EntityRegistry.addSpawn(MobTutorialHealthBar.class, 0, 1, 2, EnumCreatureType.creature, BiomeGenBase.forest, BiomeGenBase.plains, BiomeGenBase.extremeHills);
 		}

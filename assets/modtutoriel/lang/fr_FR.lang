@@ -1,7 +1,16 @@
 #fr_FR - by robin4002
 
 #Commands
-commands.tutoriel.usage=/tutoriel <commands> <valeur>
+commands.tutoriel.usage=Utilisation : /tutoriel <sous-commande> <valeur>
+commands.tutoriel.help=Les commandes disponibles sont spawn (active ou désactive le spawn de mod tutoriel) et fire (brûle un joueur)
+commands.tutoriel.spawn.enable=Spawn activé
+commands.tutoriel.spawn.disable=Spawn désactivé
+commands.tutoriel.spawn.usage=- spawn <valeur> : Active ou désactive le spawn de mod tutoriel. <valeur> est une boolean, true ou false
+commands.tutoriel.spawn.invalid=Argument invalide.
+commands.tutoriel.fire.success=%1$s brûle pendant %2$s secondes
+commands.tutoriel.fire.failure=Joueur non trouvé
+commands.tutoriel.fire.usage.1=- fire <secondes> : Vous brûles pendant <secondes>
+commands.tutoriel.fire.usage.2=- fire <joueur> <secondes> : brûle <joueur> pendant <secondes>
 
 #Block
 tile.BlockTutorial.name=Bloc Tutoriel

@@ -1,7 +1,16 @@
 #en_US - master lang file
 
 #Commands
-commands.tutoriel.usage=/tutoriel <commands> <valeur>
+commands.tutoriel.usage=Usage : /tutoriel <subcommand> <value>
+commands.tutoriel.help=Available commands is spawn (Enable or disable mob tuto spawn) and fire (burn a player)
+commands.tutoriel.spawn.enable=Spawn enable
+commands.tutoriel.spawn.disable=Spawn disable
+commands.tutoriel.spawn.usage=- spawn <value> : Enable or disable spawn of mod tutoriel. <value> is a boolean, true or false
+commands.tutoriel.spawn.invalid=Invalid argument.
+commands.tutoriel.fire.success=%1$s burn for %2$s secondes
+commands.tutoriel.fire.failure=Player no found
+commands.tutoriel.fire.usage.1=- fire <seconds> : burn you for <seconds>
+commands.tutoriel.fire.usage.2=- fire <player> <seconds> : burn <player> for <seconds>
 
 #Block
 tile.BlockTutorial.name=Tutorial Block
