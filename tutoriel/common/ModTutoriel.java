@@ -19,7 +19,6 @@ import net.minecraftforge.fluids.FluidRegistry;
 import tutoriel.client.EventSoundTutorial;
 import tutoriel.client.TextureEvent;
 import tutoriel.proxy.TutoCommonProxy;
-import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -27,6 +26,7 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartedEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
@@ -124,7 +124,7 @@ public class ModTutoriel
 		BlockTutorialCake = new BlockCakeTutorial(BlockTutorialCakeID).setHardness(0.5F).setStepSound(Block.soundClothFootstep).setUnlocalizedName("TutorialGateau");
 		BlockNewFenceTutorial = new BlockFence(BlockNewFenceTutorialID, "snow", Material.snow).setUnlocalizedName("TutorialFence").setCreativeTab(ModTutoriel.TutorialCreativeTabs);
 		BlockNewWallTutorial = new BlockTutorialWall(BlockNewWallTutorialID, Block.snow).setUnlocalizedName("TutorialWall").setCreativeTab(ModTutoriel.TutorialCreativeTabs);
-
+		
 		if(fluidTutorial.getBlockID() == -1)
 		{
 			blockFluidTutorial = new BlockFluidTutorial(fluidTutorialID, fluidTutorial, Material.water).setUnlocalizedName("fluidTutorial");
@@ -162,7 +162,7 @@ public class ModTutoriel
 		ItemTutorialCake = new ItemTutorialCake(ItemTutorialCakeID).setUnlocalizedName("TurorialGateauItem").setTextureName("modtutoriel:TutorialCake");
 		ItemCdTutorial = new ItemCdTutorial(ItemCdTutorialID, "modtutoriel:cd").setUnlocalizedName("cdTutorial").setCreativeTab(ModTutoriel.TutorialCreativeTabs);
 		bucketTutorial = new ItemBucketTutorial(bucketTutorialID, blockFluidTutorial.blockID).setUnlocalizedName("bucketTutorial").setTextureName("modtutoriel:bucketTutorial");
-		
+
 		// Enregistrement des items - Item registry
 		GameRegistry.registerItem(ItemTutorial, "ItemTutorial", "ModTutoriel");
 		GameRegistry.registerItem(ItemWithMetadata, "ItemWithMetadata", "ModTutoriel");
@@ -178,15 +178,11 @@ public class ModTutoriel
 		GameRegistry.registerItem(TutorialHoe, "TutorialHoe", "ModTutoriel");
 		GameRegistry.registerItem(ItemTutorialCake, "TutorialGateauItem", "ModTutoriel");
 		GameRegistry.registerItem(bucketTutorial, "BucketTutorial", "ModTutoriel");
-		
+
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluidStack("tutorial", FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(bucketTutorial), FluidContainerRegistry.EMPTY_BUCKET);
 
 		EntityRegistry.registerGlobalEntityID(MobTutorialHealthBar.class, "MobTutorielHealthBar", EntityRegistry.findGlobalUniqueEntityId(), 0, 0);
 		EntityRegistry.registerModEntity(MobTutorialHealthBar.class, "MobTutorialHealthBar", 1254, this, 100, 1, true);
-		if(CommandTutoriel.canSpawn)
-		{
-			EntityRegistry.addSpawn(MobTutorialHealthBar.class, 0, 1, 2, EnumCreatureType.creature, BiomeGenBase.forest, BiomeGenBase.plains, BiomeGenBase.extremeHills);
-		}
 
 		// Achievements
 	}
@@ -195,7 +191,7 @@ public class ModTutoriel
 	public void Init(FMLInitializationEvent event)
 	{
 		// Event Bus
-		MinecraftForge.EVENT_BUS.register(new LivingEvent());
+		MinecraftForge.EVENT_BUS.register(new EntityEvent());
 		MinecraftForge.EVENT_BUS.register(new TextureEvent());
 		MinecraftForge.EVENT_BUS.register(new BucketEvent());
 
@@ -232,7 +228,7 @@ public class ModTutoriel
 	{
 		// Integration avec les autres mods - integration with others mods
 	}
-	
+
 	@EventHandler
 	public void serverStarting(FMLServerStartingEvent event)
 	{

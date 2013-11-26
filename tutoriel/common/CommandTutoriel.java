@@ -12,8 +12,6 @@ import net.minecraft.util.EnumChatFormatting;
 
 public class CommandTutoriel extends CommandBase
 {
-	public static boolean canSpawn;
-
 	@Override
 	public String getCommandName()
 	{
@@ -31,31 +29,31 @@ public class CommandTutoriel extends CommandBase
 	{
 		if(arguments.length <= 0)
 			throw new WrongUsageException(this.getCommandUsage(sender));
-		if(arguments[0].matches("spawn"))
+		if(arguments[0].matches("creeper"))
 		{
 			if(arguments.length == 1)
 			{
 				sender.sendChatToPlayer(ChatMessageComponent.createFromTranslationKey("commands.tutoriel.usage").setColor(EnumChatFormatting.RED));
-				sender.sendChatToPlayer(ChatMessageComponent.createFromTranslationKey("commands.tutoriel.spawn.usage").setColor(EnumChatFormatting.RED));
+				sender.sendChatToPlayer(ChatMessageComponent.createFromTranslationKey("commands.tutoriel.creeper.usage").setColor(EnumChatFormatting.RED));
 			}
-			else if(arguments[1].matches("true"))
+			else if(arguments[1].matches("enable"))
 			{
-				canSpawn = true;
-				sender.sendChatToPlayer(ChatMessageComponent.createFromTranslationKey("commands.tutoriel.spawn.enable"));
+				sender.getEntityWorld().getWorldInfo().getGameRulesInstance().setOrCreateGameRule("enableCreeper", "true");
+				sender.sendChatToPlayer(ChatMessageComponent.createFromTranslationKey("commands.tutoriel.creeper.enable"));
 			}
-			else if(arguments[1].matches("false"))
+			else if(arguments[1].matches("disable"))
 			{
-				canSpawn = false;
-				sender.sendChatToPlayer(ChatMessageComponent.createFromTranslationKey("commands.tutoriel.spawn.disable"));
+				sender.getEntityWorld().getWorldInfo().getGameRulesInstance().setOrCreateGameRule("enableCreeper", "false");
+				sender.sendChatToPlayer(ChatMessageComponent.createFromTranslationKey("commands.tutoriel.creeper.disable"));
 			}
 			else if(arguments[1].matches("help"))
 			{
 				sender.sendChatToPlayer(ChatMessageComponent.createFromTranslationKey("commands.tutoriel.usage"));
-				sender.sendChatToPlayer(ChatMessageComponent.createFromTranslationKey("commands.tutoriel.spawn.usage"));
+				sender.sendChatToPlayer(ChatMessageComponent.createFromTranslationKey("commands.tutoriel.creeper.usage"));
 			}
 			else
 			{
-				sender.sendChatToPlayer(ChatMessageComponent.createFromTranslationKey("commands.tutoriel.spawn.invalid").setColor(EnumChatFormatting.RED));
+				sender.sendChatToPlayer(ChatMessageComponent.createFromTranslationKey("commands.tutoriel.creeper.invalid").setColor(EnumChatFormatting.RED));
 			}
 		}
 		else if(arguments[0].matches("fire"))
@@ -114,7 +112,7 @@ public class CommandTutoriel extends CommandBase
 
 	public List addTabCompletionOptions(ICommandSender sender, String[] arguments)
 	{
-		return arguments.length == 1 ? getListOfStringsMatchingLastWord(arguments, new String[] {"spawn", "fire"}) : (arguments.length == 2 && arguments[0].matches("spawn") ? getListOfStringsMatchingLastWord(arguments, new String[] {"true", "false"}) : (arguments.length == 2 && arguments[0].matches("fire") ? getListOfStringsMatchingLastWord(arguments, this.getPlayers()) : null));
+		return arguments.length == 1 ? getListOfStringsMatchingLastWord(arguments, new String[] {"creeper", "fire"}) : (arguments.length == 2 && arguments[0].matches("creeper") ? getListOfStringsMatchingLastWord(arguments, new String[] {"enable", "disable"}) : (arguments.length == 2 && arguments[0].matches("fire") ? getListOfStringsMatchingLastWord(arguments, this.getPlayers()) : null));
 	}
 
 	protected String[] getPlayers()

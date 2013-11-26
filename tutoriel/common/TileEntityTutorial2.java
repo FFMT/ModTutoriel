@@ -26,7 +26,6 @@ public class TileEntityTutorial2 extends TileEntity
 	public void setDirection(int direct)
 	{
 		direction = direct;
-		worldObj.notifyBlockChange(xCoord, yCoord, zCoord, 2);
 	}
 
 	public int getDirection()
