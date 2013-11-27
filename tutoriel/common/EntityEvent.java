@@ -55,4 +55,34 @@ public class EntityEvent
 			}
 		}
 	}
+
+	@ForgeSubscribe
+	public void onEntityJoinWorld(EntityJoinWorldEvent event)
+	{
+		if(event.entity instanceof EntityCreeper)
+		{
+			if(event.world.getWorldInfo().getGameRulesInstance().hasRule("enableCreeper"))
+			{
+				if(!event.world.getWorldInfo().getGameRulesInstance().getGameRuleBooleanValue("enableCreeper"))
+				{
+					event.setCanceled(true);
+				}
+			}
+		}
+	}
+
+	@ForgeSubscribe
+	public void onLivingUpdate(LivingUpdateEvent event)
+	{
+		if(event.entity instanceof EntityCreeper)
+		{
+			if(event.entity.worldObj.getWorldInfo().getGameRulesInstance().hasRule("enableCreeper"))
+			{
+				if(!event.entity.worldObj.getWorldInfo().getGameRulesInstance().getGameRuleBooleanValue("enableCreeper"))
+				{
+					event.entity.setDead();
+				}
+			}
+		}
+	}
 }

@@ -1,5 +1,17 @@
 #fr_FR - by robin4002
 
+#Commands
+commands.tutoriel.usage=Utilisation : /tutoriel <sous-commande> <valeur>
+commands.tutoriel.help=Les commandes disponibles sont creeper (active ou désactive les creeper) et fire (brûle un joueur)
+commands.tutoriel.creeper.enable=Creeper activé
+commands.tutoriel.creeper.disable=Creeper désactivé
+commands.tutoriel.creeper.usage=- creeper <valeur> : Active ou désactive les creeper. <valeur> est soit "enable", soit "disable"
+commands.tutoriel.creeper.invalid=Argument invalide.
+commands.tutoriel.fire.success=%1$s brûle pendant %2$s secondes
+commands.tutoriel.fire.failure=Joueur non trouvé
+commands.tutoriel.fire.usage.1=- fire <secondes> : Vous brûles pendant <secondes>
+commands.tutoriel.fire.usage.2=- fire <joueur> <secondes> : brûle <joueur> pendant <secondes>
+
 #Block
 tile.BlockTutorial.name=Bloc Tutoriel
 tile.TutorialMetadata.block1.name=Tutoriel metadata 1
