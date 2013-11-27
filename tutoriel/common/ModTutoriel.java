@@ -228,10 +228,4 @@ public class ModTutoriel
 	{
 		// Integration avec les autres mods - integration with others mods
 	}
-
-	@EventHandler
-	public void serverStarting(FMLServerStartingEvent event)
-	{
-		event.registerServerCommand(new CommandTutoriel());
-	}
 }
