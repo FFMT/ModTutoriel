@@ -29,6 +29,7 @@ tile.TutorialSlab.diamond.name=Diamond Slab
 tile.TutorialSlab.gold.name=Gold Slab
 tile.TutorialSlab.iron.name=Iron Slab
 tile.fluidTutorial.name=Tutorial Fuild
+tile.table.name=Table
 
 #Fluid
 fluid.tutorial=Tutorial Fuild

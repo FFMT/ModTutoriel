@@ -29,6 +29,7 @@ tile.TutorialSlab.diamond.name=Dalle en diamant
 tile.TutorialSlab.gold.name=Dalle en or
 tile.TutorialSlab.iron.name=Dalle en fer
 tile.fluidTutorial.name=Fluide tutoriel
+tile.table.name=Table
 
 #Fluid
 fluid.tutorial=Fluide tutoriel
