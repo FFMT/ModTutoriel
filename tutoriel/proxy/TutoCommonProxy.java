@@ -6,6 +6,10 @@ public class TutoCommonProxy
 	{
 		// rien ici, les rendu se fond que sur le client
 		// nothing here, render = client
-
+	}
+	
+	public void registerTileEntityRender()
+	{
+		
 	}
 }

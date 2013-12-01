@@ -41,12 +41,12 @@ public class ModTutoriel
 	public static ModTutoriel instance;
 
 	// declaration des blocs - blocks statement
-	public static Block BlockTutorial, TutorialMetadata, StairsTutorial, DoubleSlabTuto, SingleSlabTuto, BlockTutorialCake, BlockNewFenceTutorial, BlockNewWallTutorial, blockFluidTutorial, blockTable;
+	public static Block BlockTutorial, TutorialMetadata, StairsTutorial, DoubleSlabTuto, SingleSlabTuto, BlockTutorialCake, BlockNewFenceTutorial, BlockNewWallTutorial, blockFluidTutorial, blockTable, blockSculpture;
 	public static Item ItemTutorial, ItemWithMetadata, TutorialHelmet, TutorialChestPlate, TutorialLeggings, TutorialBoots, TutorialEgg, TutorialSword, TutorialPickaxe, TutorialAxe, TutorialShovel, TutorialHoe, ItemTutorialCake, ItemCdTutorial, bucketTutorial;
 	public static Fluid fluidTutorial;
 
 	public static int BlockTutorialID, TutorialMetadataID, StairsTutorialID, DoubleSlabTutoID, SingleSlabTutoID, fluidTutorialID, ItemTutorialID, ItemWithMetadataID, TutorialHelmetID, TutorialChestPlateID, TutorialLeggingsID, TutorialBootsID, TutorialEggID, TutorialSwordID, TutorialPickaxeID, TutorialAxeID, TutorialShovelID, TutorialHoeID, BlockTutorialCakeID, ItemTutorialCakeID,
-			BlockNewFenceTutorialID, BlockNewWallTutorialID, ItemCdTutorialID, bucketTutorialID, blockTableID;
+			BlockNewFenceTutorialID, BlockNewWallTutorialID, ItemCdTutorialID, bucketTutorialID, blockTableID, blockSculptureID;
 
 	static EnumArmorMaterial TutorialArmor = EnumHelper.addArmorMaterial("Tutorial", 20, new int[] {2, 8, 4, 2}, 15);
 	static EnumToolMaterial TutorialMaterial = EnumHelper.addToolMaterial("Tutorial", 3, 761, 14.0F, 4, 5);
@@ -73,6 +73,7 @@ public class ModTutoriel
 			BlockNewWallTutorialID = cfg.getBlock("Wall", 2007).getInt();
 			fluidTutorialID = cfg.getBlock("Fluid", 2008).getInt();
 			blockTableID = cfg.getBlock("Simple rennder block", 2009).getInt();
+			blockSculptureID = cfg.getBlock("Sculpture", 2010).getInt();
 
 			ItemTutorialID = cfg.getItem("Item Tutoriel", 12000).getInt();
 			ItemWithMetadataID = cfg.getItem("Item With Metadata", 12001).getInt();
@@ -135,7 +136,8 @@ public class ModTutoriel
 		}
 		
 		blockTable = new BlockTable(blockTableID).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("table");
-
+		blockSculpture = new BlockSculpture(blockSculptureID).setHardness(5.0F).setResistance(25.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("sculpture");
+		
 		// Enregistrement des blocs - Blocks registry
 		GameRegistry.registerBlock(BlockTutorial, "BlockTutorial");
 		GameRegistry.registerBlock(TutorialMetadata, ItemBlockTutorialMetadata.class, "TutorialMetadata", "ModTutoriel");
@@ -146,6 +148,7 @@ public class ModTutoriel
 		GameRegistry.registerBlock(BlockNewFenceTutorial, "TutorialFence");
 		GameRegistry.registerBlock(BlockNewWallTutorial, "TutorialWall");
 		GameRegistry.registerBlock(blockTable, "table");
+		GameRegistry.registerBlock(blockSculpture, "sculpture");
 
 		// Items
 		ItemTutorial = new ItemTutorial(ItemTutorialID).setUnlocalizedName("ItemTutorial").setTextureName("modtutoriel:ItemTutorial");
@@ -200,6 +203,7 @@ public class ModTutoriel
 		GameRegistry.registerTileEntity(TileEntityTutorial.class, "TileEntityTutorial");
 		GameRegistry.registerTileEntity(TileEntityTutorial2.class, "TileEntityTutorial2");
 		GameRegistry.registerTileEntity(TileEntityBigChest.class, "BigChest");
+		GameRegistry.registerTileEntity(TileEntitySculpture.class, "Sculpture");
 
 		GameRegistry.registerWorldGenerator(new WorldGeneratorTutoriel());
 
@@ -214,6 +218,7 @@ public class ModTutoriel
 
 		// Render
 		proxy.registerRender();
+		proxy.registerTileEntityRender();
 		// NetWork
 
 		// Recette - Recipe
