@@ -6,22 +6,22 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerBigChest extends Container
+public class ContainerCupboard extends Container
 {
-	private TileEntityBigChest tileEntity;
+	private TileEntityCupboard tileEntity;
 
-	public ContainerBigChest(InventoryPlayer playerInventory, TileEntityBigChest teChest)
+	public ContainerCupboard(InventoryPlayer playerInv, TileEntityCupboard te)
 	{
-		this.tileEntity = teChest;
+		this.tileEntity = te;
 
 		for(int i = 0; i < 6; i++)
 		{
 			for(int j = 0; j < 9; j++)
 			{
-				this.addSlotToContainer(new Slot(teChest, j + i * 9, 8 + j * 18, 18 + i * 18));
+				this.addSlotToContainer(new Slot(te, j + i * 9, 8 + j * 18, 18 + i * 18));
 			}
 		}
-		this.bindPlayerInventory(playerInventory);
+		this.bindPlayerInventory(playerInv);
 	}
 
 	private void bindPlayerInventory(InventoryPlayer playerInventory)

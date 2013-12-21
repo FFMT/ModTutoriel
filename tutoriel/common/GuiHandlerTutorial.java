@@ -4,6 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import tutoriel.client.GuiBigChest;
+import tutoriel.client.GuiCupboard;
 import cpw.mods.fml.common.network.IGuiHandler;
 
 public class GuiHandlerTutorial implements IGuiHandler
@@ -17,6 +18,12 @@ public class GuiHandlerTutorial implements IGuiHandler
 		{
 			return new ContainerBigChest(player.inventory, (TileEntityBigChest)te);
 		}
+		
+		if(te instanceof TileEntityCupboard)
+		{
+			return new ContainerCupboard(player.inventory, (TileEntityCupboard)te);
+		}
+		
 		return null;
 	}
 
@@ -28,6 +35,12 @@ public class GuiHandlerTutorial implements IGuiHandler
 		{
 			return new GuiBigChest(player.inventory, (TileEntityBigChest)te);
 		}
+		
+		if(te instanceof TileEntityCupboard)
+		{
+			return new GuiCupboard(player.inventory, (TileEntityCupboard)te);
+		}
+		
 		return null;
 	}
 }

@@ -148,7 +148,7 @@ public class ModTutoriel
 		GameRegistry.registerBlock(BlockNewFenceTutorial, "TutorialFence");
 		GameRegistry.registerBlock(BlockNewWallTutorial, "TutorialWall");
 		GameRegistry.registerBlock(blockTable, "table");
-		GameRegistry.registerBlock(blockSculpture, "sculpture");
+		GameRegistry.registerBlock(blockSculpture, ItemBlockSculpture.class, "sculpture");
 
 		// Items
 		ItemTutorial = new ItemTutorial(ItemTutorialID).setUnlocalizedName("ItemTutorial").setTextureName("modtutoriel:ItemTutorial");
@@ -204,6 +204,8 @@ public class ModTutoriel
 		GameRegistry.registerTileEntity(TileEntityTutorial2.class, "TileEntityTutorial2");
 		GameRegistry.registerTileEntity(TileEntityBigChest.class, "BigChest");
 		GameRegistry.registerTileEntity(TileEntitySculpture.class, "Sculpture");
+		GameRegistry.registerTileEntity(TileEntityCupboard.class, "Cupboard");
+		GameRegistry.registerTileEntity(TileEntityMachine.class, "StrangeMachine");
 
 		GameRegistry.registerWorldGenerator(new WorldGeneratorTutoriel());
 

@@ -1,12 +1,8 @@
 package tutoriel.common;
 
-import java.util.List;
-
+import net.minecraft.item.ItemRecord;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemRecord;
-import net.minecraft.item.ItemStack;
 
 public class ItemCdTutorial extends ItemRecord
 {

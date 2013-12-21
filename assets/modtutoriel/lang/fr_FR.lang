@@ -31,6 +31,8 @@ tile.TutorialSlab.iron.name=Dalle en fer
 tile.fluidTutorial.name=Fluide tutoriel
 tile.table.name=Table
 tile.sculpture.name=Sculpture
+tile.machine.name=Machine
+tile.cupboard.name=Placard
 
 #Fluid
 fluid.tutorial=Fluide tutoriel
@@ -58,3 +60,4 @@ itemGroup.TutorialCreativeTabs=Tutoriel Table Créative
 
 #Container
 container.bigchest=Grand coffre
+container.cupboard=Placard

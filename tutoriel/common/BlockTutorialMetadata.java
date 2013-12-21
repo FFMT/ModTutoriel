@@ -12,7 +12,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
@@ -171,7 +170,7 @@ public class BlockTutorialMetadata extends BlockContainer
 			return true;
 		}
 		
-		if(world.getBlockMetadata(x, y, z) == 3 || world.getBlockMetadata(x, y, z) == 1)
+		if(world.getBlockMetadata(x, y, z) == 3)
 		{
 			FMLNetworkHandler.openGui(player, ModTutoriel.instance, 0, world, x, y, z);
 			return true;
@@ -183,9 +182,9 @@ public class BlockTutorialMetadata extends BlockContainer
 	{
 		int direction = MathHelper.floor_double((double)(living.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
 		TileEntity te = world.getBlockTileEntity(x, y, z);
-		if(te != null && stack.getItemDamage() == 2 && te instanceof TileEntityTutorial2)
+		if(te != null && stack.getItemDamage() == 2 && te instanceof TileEntityDirectional)
 		{
-			((TileEntityTutorial2)te).setDirection(direction);
+			((TileEntityDirectional)te).setDirection((byte)direction);
 			world.markBlockForUpdate(x, y, z);
 		}
 		if(te != null && stack.getItemDamage() == 3 && te instanceof TileEntityBigChest && stack.hasDisplayName())

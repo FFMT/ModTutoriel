@@ -2,9 +2,13 @@ package tutoriel.proxy;
 
 import tutoriel.client.RenderMobTutorialHealthBar;
 import tutoriel.client.RenderTable;
+import tutoriel.client.TileEntityCupboardSpecialRender;
+import tutoriel.client.TileEntityMachineSpecialRender;
 import tutoriel.client.TileEntitySculptureSpecialRender;
 import tutoriel.common.MobTutorialHealthBar;
 import tutoriel.common.ModTutoriel;
+import tutoriel.common.TileEntityCupboard;
+import tutoriel.common.TileEntityMachine;
 import tutoriel.common.TileEntitySculpture;
 import tutoriel.proxy.TESRInventoryRenderer.TESRIndex;
 import cpw.mods.fml.client.registry.ClientRegistry;
@@ -29,6 +33,11 @@ public class TutoClientProxy extends TutoCommonProxy
 	public void registerTileEntityRender()
 	{
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySculpture.class, new TileEntitySculptureSpecialRender());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCupboard.class, new TileEntityCupboardSpecialRender());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMachine.class, new TileEntityMachineSpecialRender());
+		
 		TESRInventoryRenderer.blockByTESR.put(new TESRIndex(ModTutoriel.blockSculpture, 0), new TileEntitySculptureSpecialRender());
+		TESRInventoryRenderer.blockByTESR.put(new TESRIndex(ModTutoriel.blockSculpture, 1), new TileEntityCupboardSpecialRender());
+		TESRInventoryRenderer.blockByTESR.put(new TESRIndex(ModTutoriel.blockSculpture, 2), new TileEntityMachineSpecialRender());
 	}
 }
