@@ -13,6 +13,7 @@ public class ContainerCupboard extends Container
 	public ContainerCupboard(InventoryPlayer playerInv, TileEntityCupboard te)
 	{
 		this.tileEntity = te;
+		te.openChest();
 
 		for(int i = 0; i < 6; i++)
 		{
@@ -79,5 +80,11 @@ public class ContainerCupboard extends Container
 			}
 		}
 		return itemstack;
+	}
+
+	public void onContainerClosed(EntityPlayer player)
+	{
+		super.onContainerClosed(player);
+		tileEntity.closeChest();
 	}
 }

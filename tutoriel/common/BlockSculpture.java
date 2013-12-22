@@ -197,4 +197,11 @@ public class BlockSculpture extends Block
 			return AxisAlignedBB.getAABBPool().getAABB((double)x + this.minX, (double)y + this.minY, (double)z + this.minZ, (double)x + this.maxX, (double)y + this.maxY, (double)z + this.maxZ);
 		}
 	}
+	
+    public boolean onBlockEventReceived(World world, int x, int y, int z, int eventId, int eventValue)
+    {
+        super.onBlockEventReceived(world, x, y, z, eventId, eventValue);
+        TileEntity tileentity = world.getBlockTileEntity(x, y, z);
+        return tileentity != null ? tileentity.receiveClientEvent(eventId, eventValue) : false;
+    }
 }

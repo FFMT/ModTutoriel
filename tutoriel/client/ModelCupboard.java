@@ -12,7 +12,7 @@ public class ModelCupboard extends ModelBase
 	ModelRenderer top;
 	ModelRenderer middle;
 	ModelRenderer doorLeft;
-	ModelRenderer doorLink;
+	ModelRenderer doorRight;
 
 	public ModelCupboard()
 	{
@@ -20,24 +20,24 @@ public class ModelCupboard extends ModelBase
 		textureHeight = 32;
 
 		behind = new ModelRenderer(this, 0, 0);
-		behind.addBox(0F, 0F, 0F, 1, 16, 16);
-		behind.setRotationPoint(7F, 8F, -8F);
+		behind.addBox(0F, 0F, 0F, 1, 15, 16);
+		behind.setRotationPoint(7F, 8.5F, -8F);
 		behind.setTextureSize(64, 32);
 		behind.mirror = true;
 		setRotation(behind, 0F, 0F, 0F);
 		left = new ModelRenderer(this, 0, 0);
-		left.addBox(0F, 0F, 0F, 15, 16, 1);
-		left.setRotationPoint(-8F, 8F, 7F);
+		left.addBox(0F, 0F, 0F, 15, 15, 1);
+		left.setRotationPoint(-8F, 8.5F, 7F);
 		left.setTextureSize(64, 32);
 		left.mirror = true;
 		setRotation(left, 0F, 0F, 0F);
 		right = new ModelRenderer(this, 0, 0);
-		right.addBox(0F, 0F, 0F, 15, 16, 1);
-		right.setRotationPoint(-8F, 8F, -8F);
+		right.addBox(0F, 0F, 0F, 15, 15, 1);
+		right.setRotationPoint(-8F, 8.5F, -8F);
 		right.setTextureSize(64, 32);
 		right.mirror = true;
 		setRotation(right, 0F, 0F, 0F);
-		bottom = new ModelRenderer(this, 0, 0);
+		bottom = new ModelRenderer(this, -2, 0);
 		bottom.addBox(0F, 0F, 0F, 16, 1, 16);
 		bottom.setRotationPoint(-8F, 23F, -8F);
 		bottom.setTextureSize(64, 32);
@@ -56,17 +56,17 @@ public class ModelCupboard extends ModelBase
 		middle.mirror = true;
 		setRotation(middle, 0F, 0F, 0F);
 		doorLeft = new ModelRenderer(this, 0, 0);
-		doorLeft.addBox(0F, -6F, 0F, 1, 14, 8);
-		doorLeft.setRotationPoint(-6.9F, 15F, 8F);
+		doorLeft.addBox(0F, -8F, -8F, 1, 14, 8);
+		doorLeft.setRotationPoint(-7.9F, 17F, 8F);
 		doorLeft.setTextureSize(64, 32);
 		doorLeft.mirror = true;
-		setRotation(doorLeft, 0F, 3.141593F, 0F);
-		doorLink = new ModelRenderer(this, 46, 10);
-		doorLink.addBox(0F, -6F, 0F, 1, 14, 8);
-		doorLink.setRotationPoint(-7.9F, 15F, -8F);
-		doorLink.setTextureSize(64, 32);
-		doorLink.mirror = true;
-		setRotation(doorLink, 0F, 0F, 0F);
+		setRotation(doorLeft, 0F, 0F, 0F);
+		doorRight = new ModelRenderer(this, 46, 10);
+		doorRight.addBox(0F, -6F, 0F, 1, 14, 8);
+		doorRight.setRotationPoint(-7.9F, 15F, -8F);
+		doorRight.setTextureSize(64, 32);
+		doorRight.mirror = true;
+		setRotation(doorRight, 0F, 0F, 0F);
 	}
 
 	public void render(float f)
@@ -78,7 +78,7 @@ public class ModelCupboard extends ModelBase
 		top.render(f);
 		middle.render(f);
 		doorLeft.render(f);
-		doorLink.render(f);
+		doorRight.render(f);
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z)

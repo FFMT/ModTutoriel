@@ -13,12 +13,12 @@ public class TileEntityCupboardSpecialRender extends TileEntitySpecialRenderer i
 {
 	private final ModelCupboard model = new ModelCupboard();
 	public static final ResourceLocation textureLocation = new ResourceLocation("modtutoriel", "textures/blocks/cupboard.png");
-	
+
 	public TileEntityCupboardSpecialRender()
 	{
 		this.setTileEntityRenderer(TileEntityRenderer.instance);
 	}
-	
+
 	@Override
 	public void renderInventory(double x, double y, double z)
 	{
@@ -30,7 +30,7 @@ public class TileEntityCupboardSpecialRender extends TileEntitySpecialRenderer i
 	{
 		this.renderTileEntityCupboardeAt((TileEntityCupboard)tileentity, x, y, z, tick);
 	}
-	
+
 	public void renderTileEntityCupboardeAt(TileEntityCupboard te, double x, double y, double z, float tick)
 	{
 		GL11.glPushMatrix();
@@ -40,6 +40,11 @@ public class TileEntityCupboardSpecialRender extends TileEntitySpecialRenderer i
 		if(te != null)
 		{
 			GL11.glRotatef(90F * te.getDirection(), 0.0F, 1.0F, 0.0F);
+			float angle = te.prevLidAngle + (te.lidAngle - te.prevLidAngle) * tick;
+			angle = 1.0F - angle;
+			angle = 1.0F - angle * angle * angle;
+			this.model.doorLeft.rotateAngleY = (angle * (float)Math.PI / 2.0F);
+			this.model.doorRight.rotateAngleY = -(angle * (float)Math.PI / 2.0F);
 		}
 		GL11.glRotatef(90F, 0.0F, 1.0F, 0.0F);
 		this.model.render(0.0625F);
