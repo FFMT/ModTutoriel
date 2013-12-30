@@ -104,13 +104,61 @@ public class BlockSculpture extends Block
 			list.add(new ItemStack(id, 1, metadata));
 		}
 	}
-	
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9)
+
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ)
 	{
 		if(world.getBlockMetadata(x, y, z) == 1)
 		{
 			FMLNetworkHandler.openGui(player, ModTutoriel.instance, 1, world, x, y, z);
 			return true;
+		}
+		else if(world.getBlockMetadata(x, y, z) == 2)
+		{
+			TileEntity te = world.getBlockTileEntity(x, y, z);
+			if(te != null && te instanceof TileEntityMachine)
+			{
+				TileEntityMachine teMachine = (TileEntityMachine)te;
+				if(teMachine.getDirection() == 0 && side == 5)
+				{
+					teMachine.eraseLeverAngle();
+				}
+				else if(teMachine.getDirection() == 0 && side == 4)
+				{
+					teMachine.deraseLeverAngle();
+				}
+				
+				else if(teMachine.getDirection() == 1 && side == 3)
+				{
+					teMachine.eraseLeverAngle();
+				}
+				else if(teMachine.getDirection() == 1 && side == 2)
+				{
+					teMachine.deraseLeverAngle();
+				}
+
+				else if(teMachine.getDirection() == 2 && side == 4)
+				{
+					teMachine.eraseLeverAngle();
+				}
+				else if(teMachine.getDirection() == 2 && side == 5)
+				{
+					teMachine.deraseLeverAngle();
+				}
+
+				else if(teMachine.getDirection() == 3 && side == 2)
+				{
+					teMachine.eraseLeverAngle();
+				}
+				else if(teMachine.getDirection() == 3 && side == 3)
+				{
+					teMachine.deraseLeverAngle();
+				}
+				else
+				{
+					return false;
+				}
+				return true;
+			}
 		}
 		return false;
 	}
@@ -197,11 +245,11 @@ public class BlockSculpture extends Block
 			return AxisAlignedBB.getAABBPool().getAABB((double)x + this.minX, (double)y + this.minY, (double)z + this.minZ, (double)x + this.maxX, (double)y + this.maxY, (double)z + this.maxZ);
 		}
 	}
-	
-    public boolean onBlockEventReceived(World world, int x, int y, int z, int eventId, int eventValue)
-    {
-        super.onBlockEventReceived(world, x, y, z, eventId, eventValue);
-        TileEntity tileentity = world.getBlockTileEntity(x, y, z);
-        return tileentity != null ? tileentity.receiveClientEvent(eventId, eventValue) : false;
-    }
+
+	public boolean onBlockEventReceived(World world, int x, int y, int z, int eventId, int eventValue)
+	{
+		super.onBlockEventReceived(world, x, y, z, eventId, eventValue);
+		TileEntity tileentity = world.getBlockTileEntity(x, y, z);
+		return tileentity != null ? tileentity.receiveClientEvent(eventId, eventValue) : false;
+	}
 }

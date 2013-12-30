@@ -40,6 +40,10 @@ public class TileEntityMachineSpecialRender extends TileEntitySpecialRenderer im
 		if(te != null)
 		{
 			GL11.glRotatef(90F * te.getDirection(), 0.0F, 1.0F, 0.0F);
+			float angle = te.prevMotorAngle + (te.motorAngle - te.prevMotorAngle);
+			this.model.axe.rotateAngleX = (angle * (float)Math.PI * 2.0F);
+			this.model.propeller.rotateAngleX = (angle * (float)Math.PI * 2.0F);
+			this.model.lever.rotateAngleX = te.leverAngle;
 		}
 		GL11.glRotatef(90F, 0.0F, 1.0F, 0.0F);
 		this.model.render(0.0625F);

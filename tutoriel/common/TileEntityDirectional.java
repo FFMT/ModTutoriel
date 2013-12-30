@@ -19,10 +19,7 @@ public class TileEntityDirectional extends TileEntity
 	public void writeToNBT(NBTTagCompound nbtTag)
 	{
 		super.writeToNBT(nbtTag);
-		for(int i = 0; i < 5; i++)
-		{
-			nbtTag.setByte("direction", direction);
-		}
+		nbtTag.setByte("direction", direction);
 	}
 
 	public void setDirection(byte direct)
