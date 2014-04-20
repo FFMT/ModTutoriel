@@ -7,8 +7,6 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.ChatMessageComponent;
-import net.minecraft.util.EnumChatFormatting;
 
 public class CommandTutoriel extends CommandBase
 {
@@ -33,27 +31,27 @@ public class CommandTutoriel extends CommandBase
 		{
 			if(arguments.length == 1)
 			{
-				sender.sendChatToPlayer(ChatMessageComponent.createFromTranslationKey("commands.tutoriel.usage").setColor(EnumChatFormatting.RED));
-				sender.sendChatToPlayer(ChatMessageComponent.createFromTranslationKey("commands.tutoriel.creeper.usage").setColor(EnumChatFormatting.RED));
+				notifyAdmins(sender, "commands.tutoriel.usage");
+				notifyAdmins(sender, "commands.tutoriel.creeper.usage");
 			}
 			else if(arguments[1].matches("enable"))
 			{
 				sender.getEntityWorld().getWorldInfo().getGameRulesInstance().setOrCreateGameRule("enableCreeper", "true");
-				sender.sendChatToPlayer(ChatMessageComponent.createFromTranslationKey("commands.tutoriel.creeper.enable"));
+				notifyAdmins(sender, "commands.tutoriel.creeper.enable");
 			}
 			else if(arguments[1].matches("disable"))
 			{
 				sender.getEntityWorld().getWorldInfo().getGameRulesInstance().setOrCreateGameRule("enableCreeper", "false");
-				sender.sendChatToPlayer(ChatMessageComponent.createFromTranslationKey("commands.tutoriel.creeper.disable"));
+				notifyAdmins(sender, "commands.tutoriel.creeper.disable");
 			}
 			else if(arguments[1].matches("help"))
 			{
-				sender.sendChatToPlayer(ChatMessageComponent.createFromTranslationKey("commands.tutoriel.usage"));
-				sender.sendChatToPlayer(ChatMessageComponent.createFromTranslationKey("commands.tutoriel.creeper.usage"));
+				notifyAdmins(sender, "commands.tutoriel.usage");
+				notifyAdmins(sender, "commands.tutoriel.creeper.usage");
 			}
 			else
 			{
-				sender.sendChatToPlayer(ChatMessageComponent.createFromTranslationKey("commands.tutoriel.creeper.invalid").setColor(EnumChatFormatting.RED));
+				notifyAdmins(sender, "commands.tutoriel.creeper.invalid");
 			}
 		}
 		else if(arguments[0].matches("fire"))
@@ -64,20 +62,20 @@ public class CommandTutoriel extends CommandBase
 				if(playermp != null)
 				{
 					playermp.setFire(this.parseInt(sender, arguments[1]));
-					sender.sendChatToPlayer(ChatMessageComponent.createFromTranslationWithSubstitutions("commands.tutoriel.fire.success", playermp.getEntityName(), arguments[1]));
+					notifyAdmins(sender, "commands.tutoriel.fire.success", new Object[]{playermp.getCommandSenderName(), arguments[1]});
 				}
 				else
 				{
-					sender.sendChatToPlayer(ChatMessageComponent.createFromTranslationWithSubstitutions("commands.tutoriel.fire.failure"));
+					notifyAdmins(sender,"commands.tutoriel.fire.failure");
 				}
 			}
 			else if(arguments.length == 3)
 			{
 				if(arguments[2].matches("help"))
 				{
-					sender.sendChatToPlayer(ChatMessageComponent.createFromTranslationKey("commands.tutoriel.usage"));
-					sender.sendChatToPlayer(ChatMessageComponent.createFromTranslationWithSubstitutions("commands.tutoriel.fire.usage.1"));
-					sender.sendChatToPlayer(ChatMessageComponent.createFromTranslationWithSubstitutions("commands.tutoriel.fire.usage.2"));
+					notifyAdmins(sender,"commands.tutoriel.usage");
+					notifyAdmins(sender,"commands.tutoriel.fire.usage.1");
+					notifyAdmins(sender,"commands.tutoriel.fire.usage.2");
 				}
 				else
 				{
@@ -85,24 +83,24 @@ public class CommandTutoriel extends CommandBase
 					if(playermp != null)
 					{
 						playermp.setFire(this.parseInt(sender, arguments[2]));
-						sender.sendChatToPlayer(ChatMessageComponent.createFromTranslationWithSubstitutions("commands.tutoriel.fire.success", playermp.getEntityName(), arguments[2]));
+						notifyAdmins(sender,"commands.tutoriel.fire.success", new Object[]{playermp.getCommandSenderName(), arguments[2]});
 					}
 					else
 					{
-						sender.sendChatToPlayer(ChatMessageComponent.createFromTranslationWithSubstitutions("commands.tutoriel.fire.failure"));
+						notifyAdmins(sender,"commands.tutoriel.fire.failure");
 					}
 				}
 			}
 			else
 			{
-				sender.sendChatToPlayer(ChatMessageComponent.createFromTranslationWithSubstitutions("commands.tutoriel.usage").setColor(EnumChatFormatting.RED));
-				sender.sendChatToPlayer(ChatMessageComponent.createFromTranslationWithSubstitutions("commands.tutoriel.fire.usage.1").setColor(EnumChatFormatting.RED));
-				sender.sendChatToPlayer(ChatMessageComponent.createFromTranslationWithSubstitutions("commands.tutoriel.fire.usage.2").setColor(EnumChatFormatting.RED));
+				notifyAdmins(sender,"commands.tutoriel.usage");
+				notifyAdmins(sender,"commands.tutoriel.fire.usage.1");
+				notifyAdmins(sender,"commands.tutoriel.fire.usage.2");
 			}
 		}
 		else if(arguments[0].matches("help"))
 		{
-			sender.sendChatToPlayer(ChatMessageComponent.createFromTranslationKey("commands.tutoriel.help"));
+			notifyAdmins(sender,"commands.tutoriel.help");
 		}
 		else
 		{

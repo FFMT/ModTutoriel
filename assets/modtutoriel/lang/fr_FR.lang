@@ -1,16 +1,16 @@
 #fr_FR - by robin4002
 
 #Commands
-commands.tutoriel.usage=Utilisation : /tutoriel <sous-commande> <valeur>
+commands.tutoriel.usage=§4Utilisation : /tutoriel <sous-commande> <valeur>
 commands.tutoriel.help=Les commandes disponibles sont creeper (active ou désactive les creeper) et fire (brûle un joueur)
 commands.tutoriel.creeper.enable=Creeper activé
 commands.tutoriel.creeper.disable=Creeper désactivé
-commands.tutoriel.creeper.usage=- creeper <valeur> : Active ou désactive les creeper. <valeur> est soit "enable", soit "disable"
-commands.tutoriel.creeper.invalid=Argument invalide.
+commands.tutoriel.creeper.usage=§4- creeper <valeur> : Active ou désactive les creeper. <valeur> est soit "enable", soit "disable"
+commands.tutoriel.creeper.invalid=§4Argument invalide.
 commands.tutoriel.fire.success=%1$s brûle pendant %2$s secondes
 commands.tutoriel.fire.failure=Joueur non trouvé
-commands.tutoriel.fire.usage.1=- fire <secondes> : Vous brûles pendant <secondes>
-commands.tutoriel.fire.usage.2=- fire <joueur> <secondes> : brûle <joueur> pendant <secondes>
+commands.tutoriel.fire.usage.1=§4- fire <secondes> : Vous brûles pendant <secondes>
+commands.tutoriel.fire.usage.2=§4- fire <joueur> <secondes> : brûle <joueur> pendant <secondes>
 
 #Block
 tile.BlockTutorial.name=Bloc Tutoriel
@@ -55,9 +55,14 @@ item.TutorialShovel.name=Pelle tutoriel
 item.TutorialHoe.name=Houe tutoriel
 item.bucketTutorial.name=Seau tutoriel
 
+item.record.cd.desc=Cd disque
+
 #CreativeTabs
 itemGroup.TutorialCreativeTabs=Tutoriel Table Créative
 
 #Container
 container.bigchest=Grand coffre
 container.cupboard=Placard
+
+#Other
+last.users=Derniers utilisateurs : %s

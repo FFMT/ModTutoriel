@@ -1,19 +1,17 @@
 package tutoriel.common;
 
 import net.minecraft.item.ItemRecord;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.util.ResourceLocation;
 
 public class ItemCdTutorial extends ItemRecord
 {
-	protected ItemCdTutorial(int par1, String par2Str)
+	protected ItemCdTutorial(String name)
 	{
-		super(par1, par2Str);
+		super(name);
 	}
-	
-    @SideOnly(Side.CLIENT)
-    public String getRecordTitle()
+    
+    public ResourceLocation getRecordResource(String name)
     {
-        return "ModTutorial - " + this.recordName;
+        return new ResourceLocation("modtutoriel:records.tuto");
     }
 }

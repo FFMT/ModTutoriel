@@ -2,6 +2,8 @@ package tutoriel.proxy;
 
 import tutoriel.client.RenderMobTutorialHealthBar;
 import tutoriel.client.RenderTable;
+import tutoriel.client.TESRInventoryRenderer;
+import tutoriel.client.TESRInventoryRenderer.TESRIndex;
 import tutoriel.client.TileEntityCupboardSpecialRender;
 import tutoriel.client.TileEntityMachineSpecialRender;
 import tutoriel.client.TileEntitySculptureSpecialRender;
@@ -10,7 +12,6 @@ import tutoriel.common.ModTutoriel;
 import tutoriel.common.TileEntityCupboard;
 import tutoriel.common.TileEntityMachine;
 import tutoriel.common.TileEntitySculpture;
-import tutoriel.proxy.TESRInventoryRenderer.TESRIndex;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 

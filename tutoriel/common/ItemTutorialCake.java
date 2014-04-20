@@ -1,22 +1,21 @@
 package tutoriel.common;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class ItemTutorialCake extends Item
 {
-    public ItemTutorialCake(int id)
+    public ItemTutorialCake()
     {
-        super(id);
         this.setCreativeTab(ModTutoriel.TutorialCreativeTabs);
     }
 
-    public boolean onItemUse(ItemStack ItemStack, EntityPlayer entityplayer, World world, int x, int y, int z, int par7, float par8, float par9, float par10)
+    public boolean onItemUse(ItemStack ItemStack, EntityPlayer entityplayer, World world, int x, int y, int z, int par7, float hitX, float hitY, float hitZ)
     {
-        if (world.getBlockId(x, y, z) != Block.snow.blockID)
+        if (world.getBlock(x, y, z) != Blocks.snow)
         {
             if (par7 == 0)
             {
@@ -60,11 +59,11 @@ public class ItemTutorialCake extends Item
         }
         else
         {
-            if (Block.redstoneWire.canPlaceBlockAt(world, x, y, z))
+            if (Blocks.redstone_wire.canPlaceBlockAt(world, x, y, z))
             {
                 --ItemStack.stackSize;
-                world.setBlock(x, y, z, ModTutoriel.BlockTutorialCake.blockID);
-				String placesound = ModTutoriel.BlockTutorialCake.stepSound.getPlaceSound();
+                world.setBlock(x, y, z, ModTutoriel.BlockTutorialCake);
+				String placesound = ModTutoriel.BlockTutorialCake.stepSound.getStepResourcePath();
 				float volume = ModTutoriel.BlockTutorialCake.stepSound.getVolume();
 				float pitch = ModTutoriel.BlockTutorialCake.stepSound.getPitch();
 				world.playSoundEffect(x, y, z, placesound, volume, pitch);

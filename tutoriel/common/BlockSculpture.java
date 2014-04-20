@@ -8,15 +8,17 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import tutoriel.proxy.TutoClientProxy;
-import cpw.mods.fml.common.network.FMLNetworkHandler;
+import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -24,9 +26,9 @@ public class BlockSculpture extends Block
 {
 	public static String[] subBlock = new String[] {"sculpture", "cupboard", "machine"};
 
-	public BlockSculpture(int id)
+	public BlockSculpture()
 	{
-		super(id, Material.rock);
+		super(Material.rock);
 		this.setCreativeTab(ModTutoriel.TutorialCreativeTabs);
 	}
 
@@ -76,19 +78,19 @@ public class BlockSculpture extends Block
 		return TutoClientProxy.renderInventoryTESRId;
 	}
 
-	public Icon getIcon(int side, int metadata)
+	public IIcon getIcon(int side, int metadata)
 	{
 		if(metadata == 0 || metadata == 2)
 		{
-			return Block.stone.getIcon(0, 0);
+			return Blocks.stone.getIcon(0, 0);
 		}
-		return Block.wood.getIcon(0, 0);
+		return Blocks.log.getIcon(0, 0);
 	}
 
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase living, ItemStack stack)
 	{
 		int direction = MathHelper.floor_double((double)(living.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
-		TileEntity te = world.getBlockTileEntity(x, y, z);
+		TileEntity te = world.getTileEntity(x, y, z);
 		if(te != null && te instanceof TileEntityDirectional)
 		{
 			((TileEntityDirectional)te).setDirection((byte)direction);
@@ -97,11 +99,11 @@ public class BlockSculpture extends Block
 	}
 
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(int id, CreativeTabs creativeTabs, List list)
+	public void getSubBlocks(Item item, CreativeTabs creativeTabs, List list)
 	{
 		for(int metadata = 0; metadata < subBlock.length; metadata++)
 		{
-			list.add(new ItemStack(id, 1, metadata));
+			list.add(new ItemStack(item, 1, metadata));
 		}
 	}
 
@@ -114,7 +116,7 @@ public class BlockSculpture extends Block
 		}
 		else if(world.getBlockMetadata(x, y, z) == 2)
 		{
-			TileEntity te = world.getBlockTileEntity(x, y, z);
+			TileEntity te = world.getTileEntity(x, y, z);
 			if(te != null && te instanceof TileEntityMachine)
 			{
 				TileEntityMachine teMachine = (TileEntityMachine)te;
@@ -168,18 +170,18 @@ public class BlockSculpture extends Block
 		return metadata;
 	}
 
-	public void breakBlock(World world, int x, int y, int z, int side, int metadata)
+	public void breakBlock(World world, int x, int y, int z, Block block, int metadata)
 	{
 		if(metadata == 1)
 		{
 			dropContainerItem(world, x, y, z);
 		}
-		super.breakBlock(world, x, y, z, side, metadata);
+		super.breakBlock(world, x, y, z, block, metadata);
 	}
 
 	protected void dropContainerItem(World world, int x, int y, int z)
 	{
-		TileEntityCupboard teCupboard = (TileEntityCupboard)world.getBlockTileEntity(x, y, z);
+		TileEntityCupboard teCupboard = (TileEntityCupboard)world.getTileEntity(x, y, z);
 
 		if(teCupboard != null)
 		{
@@ -203,7 +205,7 @@ public class BlockSculpture extends Block
 						}
 
 						stack.stackSize -= k1;
-						entityitem = new EntityItem(world, (double)((float)x + f), (double)((float)y + f1), (double)((float)z + f2), new ItemStack(stack.itemID, k1, stack.getItemDamage()));
+						entityitem = new EntityItem(world, (double)((float)x + f), (double)((float)y + f1), (double)((float)z + f2), new ItemStack(stack.getItem(), k1, stack.getItemDamage()));
 						float f3 = 0.05F;
 						entityitem.motionX = (double)((float)world.rand.nextGaussian() * f3);
 						entityitem.motionY = (double)((float)world.rand.nextGaussian() * f3 + 0.2F);
@@ -249,7 +251,7 @@ public class BlockSculpture extends Block
 	public boolean onBlockEventReceived(World world, int x, int y, int z, int eventId, int eventValue)
 	{
 		super.onBlockEventReceived(world, x, y, z, eventId, eventValue);
-		TileEntity tileentity = world.getBlockTileEntity(x, y, z);
+		TileEntity tileentity = world.getTileEntity(x, y, z);
 		return tileentity != null ? tileentity.receiveClientEvent(eventId, eventValue) : false;
 	}
 }

@@ -1,18 +1,22 @@
 package tutoriel.common;
 
-import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 
 public class TutorialAxe extends ItemAxe
 {
-	public TutorialAxe(int id, EnumToolMaterial toolMaterial)
+	public TutorialAxe(ToolMaterial toolMaterial)
 	{
-		super(id, toolMaterial);
+		super(toolMaterial);
+		this.setHarvestLevel("axe", 3);
 	}
 
-	public boolean getIsRepairable(ItemStack stack, ItemStack outputstack)
+	public boolean getIsRepairable(ItemStack input, ItemStack repair)
 	{
-		return true;
+		if(repair.getItem() == ModTutoriel.ItemTutorial)
+		{
+			return true;
+		}
+		return false;
 	}
 }

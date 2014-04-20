@@ -26,8 +26,8 @@ public class GuiBigChest extends GuiContainer
 	
     protected void drawGuiContainerForegroundLayer(int par1, int par2)
     {
-        this.fontRenderer.drawString(this.playerInventory.isInvNameLocalized() ? this.playerInventory.getInvName() : I18n.getString(this.playerInventory.getInvName()), 8, 129, 0);
-        this.fontRenderer.drawString(this.bigChest.isInvNameLocalized() ? this.bigChest.getInvName() : I18n.getString(this.bigChest.getInvName()), 8, 7, 0);
+        this.fontRendererObj.drawString(this.playerInventory.hasCustomInventoryName() ? this.playerInventory.getInventoryName() : I18n.format(this.playerInventory.getInventoryName()), 8, 129, 0);
+        this.fontRendererObj.drawString(this.bigChest.hasCustomInventoryName() ? this.bigChest.getInventoryName() : I18n.format(this.bigChest.getInventoryName()), 8, 7, 0);
     }
 
 	@Override

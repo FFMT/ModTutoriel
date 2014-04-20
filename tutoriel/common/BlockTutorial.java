@@ -2,10 +2,10 @@ package tutoriel.common;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
@@ -13,15 +13,15 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockTutorial extends Block
 {
-	private Icon icontop, iconbottom, iconfront;
+	private IIcon icontop, iconbottom, iconfront;
 
-	public BlockTutorial(int id)
+	public BlockTutorial()
 	{
-		super(id, Material.rock);
+		super(Material.rock);
 		this.setCreativeTab(ModTutoriel.TutorialCreativeTabs);
 	}
 
-	public void registerIcons(IconRegister iconRegister)
+	public void registerBlockIcons(IIconRegister iconRegister)
 	{
 		blockIcon = iconRegister.registerIcon("modtutoriel:BlockTutorial");
 		iconfront = iconRegister.registerIcon("modtutoriel:BlockTutorial_Front");
@@ -30,7 +30,7 @@ public class BlockTutorial extends Block
 	}
 
 	@SideOnly(Side.CLIENT)
-	public Icon getIcon(int side, int metadata)
+	public IIcon getIcon(int side, int metadata)
 	{
 		return side == 1 ? this.icontop : (side == 0 ? this.iconbottom : (metadata == 2 && side == 2 ? this.iconfront : (metadata == 3 && side == 5 ? this.iconfront : (metadata == 0 && side == 3 ? this.iconfront : (metadata == 1 && side == 4 ? this.iconfront : this.blockIcon)))));
 	}

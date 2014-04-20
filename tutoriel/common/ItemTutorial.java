@@ -7,12 +7,6 @@ import net.minecraft.world.World;
 
 public class ItemTutorial extends Item
 {
-	public ItemTutorial(int id)
-	{
-		super(id);
-		this.setCreativeTab(ModTutoriel.TutorialCreativeTabs);
-	}
-
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
 	{
 		world.playSoundAtEntity(player, "modtutoriel:explosion", 1.0F, 1.0F);

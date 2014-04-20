@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraftforge.common.util.Constants;
 
 public class TileEntityCupboard extends TileEntityDirectional implements IInventory
 {
@@ -22,7 +23,7 @@ public class TileEntityCupboard extends TileEntityDirectional implements IInvent
 	public void readFromNBT(NBTTagCompound nbttag)
 	{
 		super.readFromNBT(nbttag);
-		NBTTagList nbttaglist = nbttag.getTagList("Items");
+		NBTTagList nbttaglist = nbttag.getTagList("Items", Constants.NBT.TAG_COMPOUND);
 		this.inventory = new ItemStack[this.getSizeInventory()];
 
 		if(nbttag.hasKey("CustomName"))
@@ -32,7 +33,7 @@ public class TileEntityCupboard extends TileEntityDirectional implements IInvent
 
 		for(int i = 0; i < nbttaglist.tagCount(); i++)
 		{
-			NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.tagAt(i);
+			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 			int j = nbttagcompound1.getByte("Slot");
 
 			if(j >= 0 && j < this.inventory.length)
@@ -60,7 +61,7 @@ public class TileEntityCupboard extends TileEntityDirectional implements IInvent
 
 		nbttag.setTag("Items", nbttaglist);
 
-		if(this.isInvNameLocalized())
+		if(this.hasCustomInventoryName())
 		{
 			nbttag.setString("CustomName", this.customName);
 		}
@@ -89,7 +90,7 @@ public class TileEntityCupboard extends TileEntityDirectional implements IInvent
 			{
 				itemstack = this.inventory[slotId];
 				this.inventory[slotId] = null;
-				this.onInventoryChanged();
+				this.markDirty();
 				return itemstack;
 			}
 			else
@@ -101,7 +102,7 @@ public class TileEntityCupboard extends TileEntityDirectional implements IInvent
 					this.inventory[slotId] = null;
 				}
 
-				this.onInventoryChanged();
+				this.markDirty();
 				return itemstack;
 			}
 		}
@@ -136,17 +137,17 @@ public class TileEntityCupboard extends TileEntityDirectional implements IInvent
 			stack.stackSize = this.getInventoryStackLimit();
 		}
 
-		this.onInventoryChanged();
+		this.markDirty();
 	}
-
+	
 	@Override
-	public String getInvName()
+	public String getInventoryName()
 	{
-		return this.isInvNameLocalized() ? this.customName : "container.cupboard";
+		return this.hasCustomInventoryName() ? this.customName : "container.cupboard";
 	}
 
 	@Override
-	public boolean isInvNameLocalized()
+	public boolean hasCustomInventoryName()
 	{
 		return this.customName != null && this.customName.length() > 0;
 	}
@@ -165,7 +166,7 @@ public class TileEntityCupboard extends TileEntityDirectional implements IInvent
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player)
 	{
-		return worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) == this && player.getDistanceSq(xCoord + 0.5, yCoord + 0.5, zCoord + 0.5) < 64;
+		return worldObj.getTileEntity(xCoord, yCoord, zCoord) == this && player.getDistanceSq(xCoord + 0.5, yCoord + 0.5, zCoord + 0.5) < 64;
 	}
 
 	public void updateEntity()
@@ -243,7 +244,7 @@ public class TileEntityCupboard extends TileEntityDirectional implements IInvent
 	}
 
 	@Override
-	public void openChest()
+	public void openInventory()
 	{
 		if(this.numUsingPlayers < 0)
 		{
@@ -251,14 +252,14 @@ public class TileEntityCupboard extends TileEntityDirectional implements IInvent
 		}
 
 		++this.numUsingPlayers;
-		this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 1, this.numUsingPlayers);
+		this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType(), 1, this.numUsingPlayers);
 	}
 
 	@Override
-	public void closeChest()
+	public void closeInventory()
 	{
 		--this.numUsingPlayers;
-		this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 1, this.numUsingPlayers);
+		this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType(), 1, this.numUsingPlayers);
 	}
 
 	@Override

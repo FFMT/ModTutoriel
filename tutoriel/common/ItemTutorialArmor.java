@@ -1,21 +1,20 @@
 package tutoriel.common;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 
 public class ItemTutorialArmor extends ItemArmor
 {
-	public ItemTutorialArmor(int id, EnumArmorMaterial armorMaterial, int type, int layer)
+	public ItemTutorialArmor(ArmorMaterial armorMaterial, int type)
 	{
-		super(id, armorMaterial, type, layer);
+		super(armorMaterial, 0, type);
 		this.setCreativeTab(ModTutoriel.TutorialCreativeTabs);
 	}
 
-	public String getArmorTexture(ItemStack stack, Entity entity, int slot, int layer)
+	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type)
 	{
-		if(stack.itemID == ModTutoriel.TutorialLeggings.itemID)
+		if(stack.getItem() == ModTutoriel.TutorialLeggings)
 		{
 			return "modtutoriel:textures/models/armor/tutorial_layer_2.png";
 		}

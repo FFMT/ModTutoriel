@@ -1,0 +1,19 @@
+{
+  "explosion": {
+    "category": "player",
+    "sounds": [
+      "explosion1",
+      "explosion2",
+      "explosion3"
+    ]
+  },
+  "records.tuto": {
+    "category": "record",
+    "sounds": [
+      {
+        "name": "records/tuto",
+        "stream": true
+      }
+    ]
+  }
+}

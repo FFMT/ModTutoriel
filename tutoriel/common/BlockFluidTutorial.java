@@ -1,8 +1,8 @@
 package tutoriel.common;
 
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.util.Icon;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.BlockFluidClassic;
@@ -10,19 +10,19 @@ import net.minecraftforge.fluids.Fluid;
 
 public class BlockFluidTutorial extends BlockFluidClassic
 {
-	private Icon stillIcon, flowingIcon;
+	private IIcon stillIcon, flowingIcon;
 
-	public BlockFluidTutorial(int id, Fluid fluid, Material material)
+	public BlockFluidTutorial(Fluid fluid, Material material)
 	{
-		super(id, fluid, material);
+		super(fluid, material);
 	}
 
-	public Icon getIcon(int side, int meta)
+	public IIcon getIcon(int side, int meta)
 	{
 		return (side == 0 || side == 1) ? stillIcon : flowingIcon;
 	}
 
-	public void registerIcons(IconRegister register)
+	public void registerBlockIcons(IIconRegister register)
 	{
 		stillIcon = register.registerIcon("modtutoriel:tuto_fluid_still");
 		flowingIcon = register.registerIcon("modtutoriel:tuto_fluid_flow");
@@ -30,7 +30,7 @@ public class BlockFluidTutorial extends BlockFluidClassic
 
 	public boolean canDisplace(IBlockAccess world, int x, int y, int z)
 	{
-		if(world.getBlockMaterial(x, y, z).isLiquid())
+		if(world.getBlock(x, y, z).getMaterial().isLiquid())
 		{
 			return false;
 		}
@@ -39,7 +39,7 @@ public class BlockFluidTutorial extends BlockFluidClassic
 
 	public boolean displaceIfPossible(World world, int x, int y, int z)
 	{
-		if(world.getBlockMaterial(x, y, z).isLiquid())
+		if(world.getBlock(x, y, z).getMaterial().isLiquid())
 		{
 			return false;
 		}

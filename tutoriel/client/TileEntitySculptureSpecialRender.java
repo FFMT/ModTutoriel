@@ -1,6 +1,6 @@
 package tutoriel.client;
 
-import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
+import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
@@ -15,7 +15,7 @@ public class TileEntitySculptureSpecialRender extends TileEntitySpecialRenderer 
 	public static final ResourceLocation textureLocation = new ResourceLocation("modtutoriel", "textures/blocks/modelTutoriel.png");
 	public TileEntitySculptureSpecialRender()
 	{
-		this.setTileEntityRenderer(TileEntityRenderer.instance);
+		this.func_147497_a(TileEntityRendererDispatcher.instance);
 	}
 	
 	@Override

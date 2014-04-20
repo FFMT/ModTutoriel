@@ -4,10 +4,11 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
@@ -15,21 +16,21 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockCakeTutorial extends Block
 {
-	private Icon cakeTopIcon, cakeBottomIcon, cakeInnerIcon;
+	private IIcon cakeTopIcon, cakeBottomIcon, cakeInnerIcon;
 
-	public BlockCakeTutorial(int id)
+	public BlockCakeTutorial()
 	{
-		super(id, Material.cake);
+		super(Material.cake);
 		this.setTickRandomly(true);
 		this.setCreativeTab(ModTutoriel.TutorialCreativeTabs);
 	}
 
-	public Icon getIcon(int icon1, int icon2)
+	public IIcon getIcon(int icon1, int icon2)
 	{
 		return icon1 == 1 ? this.cakeTopIcon : (icon1 == 0 ? this.cakeBottomIcon : (icon2 > 0 && icon1 == 4 ? this.cakeInnerIcon : this.blockIcon));
 	}
 
-	public void registerIcons(IconRegister iconregister)
+	public void registerBlockIcons(IIconRegister iconregister)
 	{
 		this.blockIcon = iconregister.registerIcon("modtutoriel:caketuto_side");
 		this.cakeInnerIcon = iconregister.registerIcon("modtutoriel:caketuto_inner");
@@ -126,7 +127,7 @@ public class BlockCakeTutorial extends Block
 
 	public boolean canBlockStay(World world, int x, int y, int z)
 	{
-		return world.getBlockMaterial(x, y - 1, z).isSolid();
+		return world.getBlock(x, y - 1, z).getMaterial().isSolid();
 	}
 
 	public int quantityDropped(Random random)
@@ -138,9 +139,10 @@ public class BlockCakeTutorial extends Block
 	{
 		return 0;
 	}
-
-	public int idPicked(World world, int x, int y, int z)
-	{
-		return ModTutoriel.ItemTutorialCake.itemID;
-	}
+	
+    @SideOnly(Side.CLIENT)
+    public Item getItem(World world, int x, int y, int z)
+    {
+        return ModTutoriel.ItemTutorialCake;
+    }
 }

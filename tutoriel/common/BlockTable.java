@@ -2,7 +2,8 @@ package tutoriel.common;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.util.Icon;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import tutoriel.proxy.TutoClientProxy;
 import cpw.mods.fml.relauncher.Side;
@@ -10,9 +11,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockTable extends Block
 {
-	public BlockTable(int id)
+	public BlockTable()
 	{
-		super(id, Material.wood);
+		super(Material.wood);
 		this.setCreativeTab(ModTutoriel.TutorialCreativeTabs);
 	}
 
@@ -38,8 +39,8 @@ public class BlockTable extends Block
 		return true;
 	}
 	
-	public Icon getIcon(int side, int metadata)
+	public IIcon getIcon(int side, int metadata)
 	{
-		return Block.planks.getIcon(side, 0);
+		return Blocks.planks.getIcon(side, 0);
 	}
 }

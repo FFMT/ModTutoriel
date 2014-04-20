@@ -6,59 +6,60 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.util.Constants;
 
 public class TileEntityBigChest extends TileEntity implements IInventory
 {
-    private ItemStack[] inventory = new ItemStack[72];
+	private ItemStack[] inventory = new ItemStack[72];
 	private String customName;
-    
-    public void readFromNBT(NBTTagCompound nbttag)
-    {
-        super.readFromNBT(nbttag);
-        NBTTagList nbttaglist = nbttag.getTagList("Items");
-        this.inventory = new ItemStack[this.getSizeInventory()];
 
-        if (nbttag.hasKey("CustomName"))
-        {
-            this.customName = nbttag.getString("CustomName");
-        }
+	public void readFromNBT(NBTTagCompound nbttag)
+	{
+		super.readFromNBT(nbttag);
+		NBTTagList nbttaglist = nbttag.getTagList("Items", Constants.NBT.TAG_COMPOUND);
+		this.inventory = new ItemStack[this.getSizeInventory()];
 
-        for (int i = 0; i < nbttaglist.tagCount(); i++)
-        {
-            NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.tagAt(i);
-            int j = nbttagcompound1.getByte("Slot");
+		if(nbttag.hasKey("CustomName"))
+		{
+			this.customName = nbttag.getString("CustomName");
+		}
 
-            if (j >= 0 && j < this.inventory.length)
-            {
-                this.inventory[j] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-            }
-        }
-    }
+		for(int i = 0; i < nbttaglist.tagCount(); i++)
+		{
+			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
+			int j = nbttagcompound1.getByte("Slot");
 
-    public void writeToNBT(NBTTagCompound nbttag)
-    {
-        super.writeToNBT(nbttag);
-        NBTTagList nbttaglist = new NBTTagList();
+			if(j >= 0 && j < this.inventory.length)
+			{
+				this.inventory[j] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
+			}
+		}
+	}
 
-        for (int i = 0; i < this.inventory.length; i++)
-        {
-            if (this.inventory[i] != null)
-            {
-                NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-                nbttagcompound1.setByte("Slot", (byte)i);
-                this.inventory[i].writeToNBT(nbttagcompound1);
-                nbttaglist.appendTag(nbttagcompound1);
-            }
-        }
+	public void writeToNBT(NBTTagCompound nbttag)
+	{
+		super.writeToNBT(nbttag);
+		NBTTagList nbttaglist = new NBTTagList();
 
-        nbttag.setTag("Items", nbttaglist);
+		for(int i = 0; i < this.inventory.length; i++)
+		{
+			if(this.inventory[i] != null)
+			{
+				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+				nbttagcompound1.setByte("Slot", (byte)i);
+				this.inventory[i].writeToNBT(nbttagcompound1);
+				nbttaglist.appendTag(nbttagcompound1);
+			}
+		}
 
-        if (this.isInvNameLocalized())
-        {
-            nbttag.setString("CustomName", this.customName);
-        }
-    }
-    
+		nbttag.setTag("Items", nbttaglist);
+
+		if(this.hasCustomInventoryName())
+		{
+			nbttag.setString("CustomName", this.customName);
+		}
+	}
+
 	@Override
 	public int getSizeInventory()
 	{
@@ -70,84 +71,84 @@ public class TileEntityBigChest extends TileEntity implements IInventory
 	{
 		return inventory[slotId];
 	}
-	
+
 	@Override
-    public ItemStack decrStackSize(int slotId, int quantity)
-    {
-        if (this.inventory[slotId] != null)
-        {
-            ItemStack itemstack;
+	public ItemStack decrStackSize(int slotId, int quantity)
+	{
+		if(this.inventory[slotId] != null)
+		{
+			ItemStack itemstack;
 
-            if (this.inventory[slotId].stackSize <= quantity)
-            {
-                itemstack = this.inventory[slotId];
-                this.inventory[slotId] = null;
-                this.onInventoryChanged();
-                return itemstack;
-            }
-            else
-            {
-                itemstack = this.inventory[slotId].splitStack(quantity);
+			if(this.inventory[slotId].stackSize <= quantity)
+			{
+				itemstack = this.inventory[slotId];
+				this.inventory[slotId] = null;
+				this.markDirty();
+				return itemstack;
+			}
+			else
+			{
+				itemstack = this.inventory[slotId].splitStack(quantity);
 
-                if (this.inventory[slotId].stackSize == 0)
-                {
-                    this.inventory[slotId] = null;
-                }
+				if(this.inventory[slotId].stackSize == 0)
+				{
+					this.inventory[slotId] = null;
+				}
 
-                this.onInventoryChanged();
-                return itemstack;
-            }
-        }
-        else
-        {
-            return null;
-        }
-    }
+				this.markDirty();
+				return itemstack;
+			}
+		}
+		else
+		{
+			return null;
+		}
+	}
 
 	@Override
 	public ItemStack getStackInSlotOnClosing(int slotId)
 	{
-        if (this.inventory[slotId] != null)
-        {
-            ItemStack itemstack = this.inventory[slotId];
-            this.inventory[slotId] = null;
-            return itemstack;
-        }
-        else
-        {
-            return null;
-        }
+		if(this.inventory[slotId] != null)
+		{
+			ItemStack itemstack = this.inventory[slotId];
+			this.inventory[slotId] = null;
+			return itemstack;
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	@Override
 	public void setInventorySlotContents(int slotId, ItemStack stack)
 	{
-        this.inventory[slotId] = stack;
+		this.inventory[slotId] = stack;
 
-        if (stack != null && stack.stackSize > this.getInventoryStackLimit())
-        {
-            stack.stackSize = this.getInventoryStackLimit();
-        }
+		if(stack != null && stack.stackSize > this.getInventoryStackLimit())
+		{
+			stack.stackSize = this.getInventoryStackLimit();
+		}
 
-        this.onInventoryChanged();
+		this.markDirty();
 	}
 
 	@Override
-	public String getInvName()
+	public String getInventoryName()
 	{
-		return this.isInvNameLocalized() ? this.customName : "container.bigchest";
+		return this.hasCustomInventoryName() ? this.customName : "container.bigchest";
 	}
 
 	@Override
-	public boolean isInvNameLocalized()
+	public boolean hasCustomInventoryName()
 	{
-        return this.customName != null && this.customName.length() > 0;
+		return this.customName != null && this.customName.length() > 0;
 	}
-	
-    public void setCustomGuiName(String name)
-    {
-        this.customName = name;
-    }
+
+	public void setCustomGuiName(String name)
+	{
+		this.customName = name;
+	}
 
 	@Override
 	public int getInventoryStackLimit()
@@ -158,17 +159,17 @@ public class TileEntityBigChest extends TileEntity implements IInventory
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player)
 	{
-		return worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) == this && player.getDistanceSq(xCoord + 0.5, yCoord + 0.5, zCoord + 0.5) < 64;
+		return worldObj.getTileEntity(xCoord, yCoord, zCoord) == this && player.getDistanceSq(xCoord + 0.5, yCoord + 0.5, zCoord + 0.5) < 64;
 	}
 
 	@Override
-	public void openChest()
+	public void openInventory()
 	{
 
 	}
 
 	@Override
-	public void closeChest()
+	public void closeInventory()
 	{
 
 	}
@@ -178,5 +179,4 @@ public class TileEntityBigChest extends TileEntity implements IInventory
 	{
 		return true;
 	}
-
 }

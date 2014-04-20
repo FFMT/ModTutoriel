@@ -1,11 +1,11 @@
-package tutoriel.proxy;
+package tutoriel.client;
 
 import java.util.HashMap;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.world.IBlockAccess;
-import tutoriel.client.IInventoryRenderer;
+import tutoriel.proxy.TutoClientProxy;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class TESRInventoryRenderer implements ISimpleBlockRenderingHandler
@@ -58,7 +58,7 @@ public class TESRInventoryRenderer implements ISimpleBlockRenderingHandler
 	}
 
 	@Override
-	public boolean shouldRender3DInInventory()
+	public boolean shouldRender3DInInventory(int modelId)
 	{
 		return true;
 	}

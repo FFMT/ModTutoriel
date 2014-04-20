@@ -2,42 +2,44 @@ package tutoriel.common;
 
 import java.util.List;
 
-import net.minecraft.block.BlockContainer;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
+import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.network.FMLNetworkHandler;
+import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockTutorialMetadata extends BlockContainer
+public class BlockTutorialMetadata extends Block
 {
 	public static String[] type = new String[] {"block1", "block2", "block3", "block4", "block5", "block6", "block7", "block8"};
-	private Icon[] Icon1 = new Icon[6];
-	private Icon[] Icon2 = new Icon[5];
-	private Icon[] Icon3 = new Icon[4];
-	private Icon[] Icon4 = new Icon[3];
-	private Icon[] Icon5 = new Icon[2];
-	private Icon[] Icon6 = new Icon[2];
-	private Icon Icon7, Icon8;
+	private IIcon[] Icon1 = new IIcon[6];
+	private IIcon[] Icon2 = new IIcon[5];
+	private IIcon[] Icon3 = new IIcon[4];
+	private IIcon[] Icon4 = new IIcon[3];
+	private IIcon[] Icon5 = new IIcon[2];
+	private IIcon[] Icon6 = new IIcon[2];
+	private IIcon Icon7, Icon8;
 
-	public BlockTutorialMetadata(int id)
+	public BlockTutorialMetadata()
 	{
-		super(id, Material.rock);
+		super(Material.rock);
 		this.setCreativeTab(ModTutoriel.TutorialCreativeTabs);
 	}
-
-	public void registerIcons(IconRegister iconregister)
+	
+	public void registerBlockIcons(IIconRegister iconregister)
 	{
 		Icon1[0] = iconregister.registerIcon("modtutoriel:block1_bottom");
 		Icon1[1] = iconregister.registerIcon("modtutoriel:block1_top");
@@ -72,16 +74,16 @@ public class BlockTutorialMetadata extends BlockContainer
 	}
 
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(int id, CreativeTabs creativeTabs, List list)
+	public void getSubBlocks(Item item, CreativeTabs creativeTabs, List list)
 	{
 		for(int metadata = 0; metadata < type.length; metadata++)
 		{
-			list.add(new ItemStack(id, 1, metadata));
+			list.add(new ItemStack(item, 1, metadata));
 		}
 	}
 
 	@SideOnly(Side.CLIENT)
-	public Icon getIcon(int side, int metadata)
+	public IIcon getIcon(int side, int metadata)
 	{
 		switch(metadata)
 		{
@@ -112,12 +114,6 @@ public class BlockTutorialMetadata extends BlockContainer
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world)
-	{
-		return null;
-	}
-
-	@Override
 	public TileEntity createTileEntity(World world, int metadata)
 	{
 		switch(metadata)
@@ -142,12 +138,12 @@ public class BlockTutorialMetadata extends BlockContainer
 	}
 
 	@SideOnly(Side.CLIENT)
-	public Icon getBlockTexture(IBlockAccess blockaccess, int x, int y, int z, int side)
+	public IIcon getIcon(IBlockAccess blockaccess, int x, int y, int z, int side)
 	{
 		if(blockaccess.getBlockMetadata(x, y, z) == 2)
 		{
-			TileEntity te = blockaccess.getBlockTileEntity(x, y, z);
-			if(te != null && te instanceof TileEntityTutorial2)
+			TileEntity te = blockaccess.getTileEntity(x, y, z);
+			if(te instanceof TileEntityTutorial2)
 			{
 				TileEntityTutorial2 tetuto = (TileEntityTutorial2)te;
 				int direction = tetuto.getDirection();
@@ -163,9 +159,9 @@ public class BlockTutorialMetadata extends BlockContainer
 		{
 			if(!world.isRemote)
 			{
-				TileEntityTutorial te = (TileEntityTutorial)world.getBlockTileEntity(x, y, z);
-				te.addplayertolist(player.getEntityName());
-				player.addChatMessage("Derniers utilisateurs : " + te.getPlayerList());
+				TileEntityTutorial te = (TileEntityTutorial)world.getTileEntity(x, y, z);
+				te.addplayertolist(player.getCommandSenderName());
+				player.addChatMessage(new ChatComponentTranslation("last.users", te.getPlayerList()));
 			}
 			return true;
 		}
@@ -181,7 +177,7 @@ public class BlockTutorialMetadata extends BlockContainer
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase living, ItemStack stack)
 	{
 		int direction = MathHelper.floor_double((double)(living.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
-		TileEntity te = world.getBlockTileEntity(x, y, z);
+		TileEntity te = world.getTileEntity(x, y, z);
 		if(te != null && stack.getItemDamage() == 2 && te instanceof TileEntityDirectional)
 		{
 			((TileEntityDirectional)te).setDirection((byte)direction);
@@ -193,18 +189,18 @@ public class BlockTutorialMetadata extends BlockContainer
 		}
 	}
 	
-    public void breakBlock(World world, int x, int y, int z, int side, int metadata)
+    public void breakBlock(World world, int x, int y, int z, Block block, int metadata)
     {
     	if(metadata == 3)
     	{
     		dropContainerItem(world, x, y, z);
     	}
-        super.breakBlock(world, x, y, z, side, metadata);
+        super.breakBlock(world, x, y, z, block, metadata);
     }
     
     protected void dropContainerItem(World world, int x, int y, int z)
     {
-    	TileEntityBigChest bigchest = (TileEntityBigChest)world.getBlockTileEntity(x, y, z);
+    	TileEntityBigChest bigchest = (TileEntityBigChest)world.getTileEntity(x, y, z);
 
         if (bigchest != null)
         {
@@ -228,7 +224,7 @@ public class BlockTutorialMetadata extends BlockContainer
                         }
 
                         stack.stackSize -= k1;
-                        entityitem = new EntityItem(world, (double)((float)x + f), (double)((float)y + f1), (double)((float)z + f2), new ItemStack(stack.itemID, k1, stack.getItemDamage()));
+                        entityitem = new EntityItem(world, (double)((float)x + f), (double)((float)y + f1), (double)((float)z + f2), new ItemStack(stack.getItem(), k1, stack.getItemDamage()));
                         float f3 = 0.05F;
                         entityitem.motionX = (double)((float)world.rand.nextGaussian() * f3);
                         entityitem.motionY = (double)((float)world.rand.nextGaussian() * f3 + 0.2F);

@@ -1,6 +1,6 @@
 package tutoriel.client;
 
-import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
+import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
@@ -16,7 +16,7 @@ public class TileEntityMachineSpecialRender extends TileEntitySpecialRenderer im
 	
 	public TileEntityMachineSpecialRender()
 	{
-		this.setTileEntityRenderer(TileEntityRenderer.instance);
+		this.func_147497_a(TileEntityRendererDispatcher.instance);
 	}
 	
 	@Override

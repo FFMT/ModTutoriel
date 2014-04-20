@@ -1,13 +1,14 @@
 package tutoriel.common;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
 public class ItemBlockTutorialMetadata extends ItemBlock
 {
-	public ItemBlockTutorialMetadata(int id)
+	public ItemBlockTutorialMetadata(Block block)
 	{
-		super(id);
+		super(block);
 		this.setHasSubtypes(true);
 	}
 

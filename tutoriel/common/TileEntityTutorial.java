@@ -40,6 +40,6 @@ public class TileEntityTutorial extends TileEntity
 			}
 			visiteur[0] = playerName;
 		}
-		worldObj.notifyBlockChange(xCoord, yCoord, zCoord, 2);
+		worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
 	}
 }

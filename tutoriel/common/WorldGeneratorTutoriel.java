@@ -2,7 +2,7 @@ package tutoriel.common;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
@@ -30,14 +30,14 @@ public class WorldGeneratorTutoriel implements IWorldGenerator
 	{
 		for(int i = 0; i < 2; i++)
 		{
-			(new WorldGenMinable(ModTutoriel.TutorialMetadata.blockID, 0, 4, Block.stone.blockID)).generate(world, rand, x + rand.nextInt(16), rand.nextInt(32), z + rand.nextInt(16));
+			(new WorldGenMinable(ModTutoriel.TutorialMetadata, 0, 4, Blocks.stone)).generate(world, rand, x + rand.nextInt(16), rand.nextInt(32), z + rand.nextInt(16));
 		}
 
 		if(world.getBiomeGenForCoords(x, z).equals(BiomeGenBase.extremeHills))
 		{
 			for(int i = 0; i < 8; i++)
 			{
-				(new WorldGenMinable(ModTutoriel.TutorialMetadata.blockID, 5, 12, Block.stone.blockID)).generate(world, rand, x + rand.nextInt(16), 16 + rand.nextInt(32), z + rand.nextInt(16));
+				(new WorldGenMinable(ModTutoriel.TutorialMetadata, 5, 12, Blocks.stone)).generate(world, rand, x + rand.nextInt(16), 16 + rand.nextInt(32), z + rand.nextInt(16));
 			}
 		}
 	}
@@ -46,7 +46,7 @@ public class WorldGeneratorTutoriel implements IWorldGenerator
 	{
 		for(int i = 0; i < 4; i++)
 		{
-			(new WorldGenMinable(ModTutoriel.BlockTutorial.blockID, 0, 12, Block.whiteStone.blockID)).generate(world, rand, x + rand.nextInt(16), rand.nextInt(128), z + rand.nextInt(16));
+			(new WorldGenMinable(ModTutoriel.BlockTutorial, 0, 12, Blocks.end_stone)).generate(world, rand, x + rand.nextInt(16), rand.nextInt(128), z + rand.nextInt(16));
 		}
 	}
 
@@ -54,12 +54,12 @@ public class WorldGeneratorTutoriel implements IWorldGenerator
 	{
 		for(int i = 0; i < 20; i++)
 		{
-			(new WorldGenMinable(ModTutoriel.TutorialMetadata.blockID, 2, 12, Block.slowSand.blockID)).generate(world, rand, x + rand.nextInt(16), rand.nextInt(128), z + rand.nextInt(16));
+			(new WorldGenMinable(ModTutoriel.TutorialMetadata, 2, 12, Blocks.soul_sand)).generate(world, rand, x + rand.nextInt(16), rand.nextInt(128), z + rand.nextInt(16));
 		}
 
 		for(int i = 0; i < 10; i++)
 		{
-			(new WorldGenMinable(ModTutoriel.TutorialMetadata.blockID, 3, 12, Block.netherrack.blockID)).generate(world, rand, x + rand.nextInt(16), rand.nextInt(128), z + rand.nextInt(16));
+			(new WorldGenMinable(ModTutoriel.TutorialMetadata, 3, 12, Blocks.netherrack)).generate(world, rand, x + rand.nextInt(16), rand.nextInt(128), z + rand.nextInt(16));
 		}
 	}
 }

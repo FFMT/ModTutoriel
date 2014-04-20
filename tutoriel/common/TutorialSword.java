@@ -1,18 +1,21 @@
 package tutoriel.common;
 
-import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 
 public class TutorialSword extends ItemSword
 {
-	public TutorialSword(int id, EnumToolMaterial toolMaterial)
+	public TutorialSword(ToolMaterial toolMaterial)
 	{
-		super(id, toolMaterial);
+		super(toolMaterial);
 	}
 
-	public boolean getIsRepairable(ItemStack stack, ItemStack outputstack)
+	public boolean getIsRepairable(ItemStack input, ItemStack repair)
 	{
-		return true;
+		if(repair.getItem() == ModTutoriel.ItemTutorial)
+		{
+			return true;
+		}
+		return false;
 	}
 }

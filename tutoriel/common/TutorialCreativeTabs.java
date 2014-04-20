@@ -1,7 +1,7 @@
 package tutoriel.common;
 
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.Item;
 
 public class TutorialCreativeTabs extends CreativeTabs
 {
@@ -11,8 +11,14 @@ public class TutorialCreativeTabs extends CreativeTabs
 	}
 
 	@Override
-	public ItemStack getIconItemStack()
+	public Item getTabIconItem()
 	{
-		return new ItemStack(ModTutoriel.BlockTutorial);
+		return Item.getItemFromBlock(ModTutoriel.BlockTutorial);
+	}
+
+	@Override
+	public int func_151243_f()
+	{
+		return 0;
 	}
 }

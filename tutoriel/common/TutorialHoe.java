@@ -1,18 +1,21 @@
 package tutoriel.common;
 
-import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
 
 public class TutorialHoe extends ItemHoe
 {
-	public TutorialHoe(int id, EnumToolMaterial toolMaterial)
+	public TutorialHoe(ToolMaterial toolMaterial)
 	{
-		super(id, toolMaterial);
+		super(toolMaterial);
 	}
 
-	public boolean getIsRepairable(ItemStack stack, ItemStack outputstack)
+	public boolean getIsRepairable(ItemStack input, ItemStack repair)
 	{
-		return true;
+		if(repair.getItem() == ModTutoriel.ItemTutorial)
+		{
+			return true;
+		}
+		return false;
 	}
 }

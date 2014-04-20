@@ -4,9 +4,9 @@ import net.minecraft.item.ItemFood;
 
 public class ItemTutorialEgg extends ItemFood
 {
-	public ItemTutorialEgg(int id, int foodAmount, float saturation, boolean isWolfFood)
+	public ItemTutorialEgg(int foodAmount, float saturation, boolean isWolfFood)
 	{
-		super(id, foodAmount, saturation, isWolfFood);
+		super(foodAmount, saturation, isWolfFood);
 		this.setCreativeTab(ModTutoriel.TutorialCreativeTabs);
 	}
 }

@@ -9,7 +9,7 @@ import tutoriel.common.MobTutorialHealthBar;
 
 public class RenderMobTutorialHealthBar extends RenderLiving
 {
-	protected static final ResourceLocation texture = new ResourceLocation("ModID:texture.png");
+	protected static final ResourceLocation texture = new ResourceLocation("modtutoriel:textures/entity/boss.png");
 	
 	public RenderMobTutorialHealthBar()
 	{
@@ -29,7 +29,7 @@ public class RenderMobTutorialHealthBar extends RenderLiving
 	public void renderHealtBar(MobTutorialHealthBar mob, double x, double y, double z, float par8, float par9)
 	{
 		BossStatus.setBossStatus(mob, true);
-		super.doRenderLiving(mob, x, y, z, par8, par9);
+		super.doRender(mob, x, y, z, par8, par9);
 	}
 
 	public void doRender(Entity entity, double x, double y, double z, float par8, float par9)

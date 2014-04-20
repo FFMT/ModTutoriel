@@ -1,18 +1,22 @@
 package tutoriel.common;
 
-import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 
 public class TutorialShovel extends ItemSpade
 {
-	public TutorialShovel(int id, EnumToolMaterial toolMaterial)
+	public TutorialShovel(ToolMaterial toolMaterial)
 	{
-		super(id, toolMaterial);
+		super(toolMaterial);
+		this.setHarvestLevel("shovel", 3);
 	}
 
-	public boolean getIsRepairable(ItemStack stack, ItemStack outputstack)
+	public boolean getIsRepairable(ItemStack input, ItemStack repair)
 	{
-		return true;
+		if(repair.getItem() == ModTutoriel.ItemTutorial)
+		{
+			return true;
+		}
+		return false;
 	}
 }
